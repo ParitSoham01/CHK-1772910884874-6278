@@ -114,6 +114,11 @@ const HomePage = ({ onNavigate }) => {
 
             <h2 style={{ textAlign: 'center', margin: '4rem 0 2rem' }}>Our Services</h2>
             <div className="grid">
+                <div className="card" onClick={() => onNavigate('/home-cure')} style={{ cursor: 'pointer' }}>
+                    <div className="feature-icon">🏠</div>
+                    <h3>Home Cure Assistant</h3>
+                    <p>Treat minor health issues safely at home with AI-guided remedies.</p>
+                </div>
                 <div className="card" onClick={() => onNavigate('/teleconsultation')} style={{ cursor: 'pointer' }}>
                     <div className="feature-icon">💻</div>
                     <h3>Telemedicine</h3>
