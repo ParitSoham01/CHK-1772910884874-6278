@@ -67,6 +67,23 @@
                 document.getElementById('profileInfo').innerHTML = info;
                 document.getElementById('loginCard').style.display = 'none';
                 document.getElementById('profileCard').style.display = 'block';
+
+                // add continue button if not already present
+                if (!document.getElementById('continueBtn')) {
+                    const btn = document.createElement('button');
+                    btn.id = 'continueBtn';
+                    btn.textContent = 'Continue to CurePoint';
+                    btn.className = 'btn btn-primary';
+                    btn.style.width='100%';
+                    btn.style.marginTop='1rem';
+                    btn.addEventListener('click', () => {
+                        // save profile to localStorage for SPA
+                        const profile = { name, age, illnesses };
+                        localStorage.setItem('userProfile', JSON.stringify(profile));
+                        window.location.href = 'index.html';
+                    });
+                    document.getElementById('profileCard').appendChild(btn);
+                }
             } else {
                 // redirect for hospital or provider
                 window.location.href = 'index.html';

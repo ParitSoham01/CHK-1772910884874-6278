@@ -2036,6 +2036,17 @@ const InsurancePage = () => {
 // Main App Component
 const App = () => {
     const [user, setUser] = useState(null);
+
+    // initialize from login page storage
+    useEffect(() => {
+        const stored = localStorage.getItem('userProfile');
+        if (stored) {
+            try {
+                const profile = JSON.parse(stored);
+                setUser({ name: profile.name, email: '', type: 'patient' });
+            } catch {}
+        }
+    }, []);
     const [history, setHistory] = useState(['/']);
 
     const currentPage = history[history.length - 1] || '/';
