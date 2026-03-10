@@ -49,7 +49,7 @@ const Navigation = ({ user, onLogout, onNavigate }) => {
         <nav className="navbar">
             <div className="nav-container">
                 <div className="logo" onClick={() => onNavigate('/')}>
-                    Health<span>Connect</span> AI
+                    <img src="./curepoint-logo.svg" alt="CurePoint Logo" style={{ height: '32px', width: 'auto' }} />
                 </div>
                 <div className="nav-links">
                     <a onClick={() => onNavigate('/')}>Home</a>
@@ -85,7 +85,7 @@ const Footer = () => {
     return (
         <footer className="footer">
             <div className="footer-content">
-                <p>&copy; 2026 HealthConnect AI. All rights reserved.</p>
+                <p>&copy; 2026 CurePoint. All rights reserved.</p>
                 <p style={{ marginTop: '1rem', fontSize: '0.9rem' }}>
                     Emergency: Call 911 for immediate medical assistance
                 </p>
@@ -105,7 +105,7 @@ const HomePage = ({ onNavigate }) => {
             }}>
                 <div>
                     <h1 style={{ fontSize: '3rem', marginBottom: '1.5rem', lineHeight: '1.2' }}>Your AI-Powered <br /> Healthcare Assistant</h1>
-                    <p style={{ fontSize: '1.2rem', marginBottom: '2rem', opacity: '0.9' }}>Find the right doctor, check symptoms, and manage your health seamlessly in India.</p>
+                    <p style={{ fontSize: '1.2rem', marginBottom: '2rem', opacity: '0.9' }}>Find the right doctor, check symptoms, and manage your health seamlessly with CurePoint.</p>
                     <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
                         <button onClick={() => onNavigate('/symptom-test')} className="btn btn-primary" style={{ background: 'var(--accent)', color: 'white', border: 'none' }}>
                             Start AI Symptom Test
@@ -204,7 +204,7 @@ const LoginPage = ({ onLogin, onNavigate }) => {
     return (
         <div className="container">
             <div style={{ maxWidth: '400px', margin: '0 auto' }}>
-                <h2 style={{ textAlign: 'center', marginBottom: '2rem' }}>Login to HealthConnect AI</h2>
+                <h2 style={{ textAlign: 'center', marginBottom: '2rem' }}>Login to CurePoint</h2>
                 <div className="card">
                     <form onSubmit={handleSubmit}>
                         <div className="form-group">
