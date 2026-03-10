@@ -124,7 +124,7 @@ const Navigation = ({ user, onLogout, onNavigate }) => {
                         </>
                     ) : (
                         <>
-                            <a onClick={() => onNavigate('/login')} className="btn btn-outline">Login</a>
+                            <a href="login.html" className="btn btn-outline">Login</a>
                             <a onClick={() => onNavigate('/register')} className="btn btn-primary">Register</a>
                         </>
                     )}
@@ -241,6 +241,7 @@ const HomePage = ({ onNavigate }) => {
     );
 };
 
+/*
 // Login Page
 const LoginPage = ({ onLogin, onNavigate }) => {
     const [formData, setFormData] = useState({ email: '', password: '', userType: 'patient' });
@@ -268,39 +269,28 @@ const LoginPage = ({ onLogin, onNavigate }) => {
                                 onChange={(e) => setFormData({ ...formData, userType: e.target.value })}
                             >
                                 <option value="patient">Patient</option>
-                                <option value="hospital">Hospital/Provider</option>
                             </select>
                         </div>
                         <div className="form-group">
                             <label>Email</label>
-                            <input
-                                type="email"
-                                value={formData.email}
-                                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                required
-                            />
+                            <input type="email" value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })} required />
                         </div>
                         <div className="form-group">
                             <label>Password</label>
-                            <input
-                                type="password"
-                                value={formData.password}
-                                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                                required
-                            />
+                            <input type="password" value={formData.password} onChange={e => setFormData({ ...formData, password: e.target.value })} required />
                         </div>
-                        <button type="submit" className="btn btn-primary" style={{ width: '100%' }}>
-                            Login
-                        </button>
+                        <div className="form-group">
+                            <label>Confirm Password</label>
+                            <input type="password" value={formData.confirmPassword} onChange={e => setFormData({ ...formData, confirmPassword: e.target.value })} required />
+                        </div>
+                        <button type="submit" className="btn btn-primary">Register</button>
                     </form>
-                    <p style={{ textAlign: 'center', marginTop: '1rem' }}>
-                        Don't have an account? <a onClick={() => onNavigate('/register')} style={{ color: 'var(--secondary)', cursor: 'pointer' }}>Register here</a>
-                    </p>
                 </div>
             </div>
         </div>
     );
 };
+*/
 
 // Register Page
 const RegisterPage = ({ onLogin, onNavigate }) => {
@@ -432,7 +422,7 @@ const RegisterPage = ({ onLogin, onNavigate }) => {
                         </button>
                     </form>
                     <p style={{ textAlign: 'center', marginTop: '1rem' }}>
-                        Already have an account? <a onClick={() => onNavigate('/login')} style={{ color: 'var(--secondary)', cursor: 'pointer' }}>Login here</a>
+                        Already have an account? <a href="login.html" style={{ color: 'var(--secondary)', cursor: 'pointer' }}>Login here</a>
                     </p>
                 </div>
             </div>
@@ -2072,15 +2062,18 @@ const App = () => {
     const renderPage = () => {
         // Protected routes
         if (['/appointments', '/dashboard'].includes(currentPage) && !user) {
-            navigate('/login');
-            return <LoginPage onLogin={handleLogin} onNavigate={navigate} />;
+            // send unauthenticated users to standalone login page
+            window.location.href = 'login.html';
+            return null;
         }
 
         switch (currentPage) {
             case '/':
                 return <HomePage onNavigate={navigate} />;
             case '/login':
-                return <LoginPage onLogin={handleLogin} onNavigate={navigate} />;
+                // external login page
+                window.location.href = 'login.html';
+                return null;
             case '/register':
                 return <RegisterPage onLogin={handleLogin} onNavigate={navigate} />;
             case '/symptom-test':
@@ -2129,7 +2122,7 @@ const App = () => {
             <Navigation user={user} onLogout={handleLogout} onNavigate={navigate} />
 
             {/* Global Back Button */}
-            {currentPage !== '/' && !['/login', '/register'].includes(currentPage) && (
+            {currentPage !== '/' && !['/register'].includes(currentPage) && (
                 <div style={{ maxWidth: '1200px', margin: '1rem auto 0 auto', padding: '0 2rem', width: '100%' }}>
                     <button onClick={goBack} className="btn" style={{
                         display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
