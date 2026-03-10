@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Home Cure Assistant</title>
+
+<style>
+
+body{
+font-family: Arial, sans-serif;
+background:#f4f8fb;
+margin:0;
+padding:0;
+}
+
+.container{
+width:80%;
+margin:auto;
+padding:20px;
+}
+
+h1{
+text-align:center;
+color:#1e88e5;
+}
+
+.card{
+background:white;
+padding:20px;
+margin-top:20px;
+border-radius:10px;
+box-shadow:0px 3px 8px rgba(0,0,0,0.1);
+}
+
+label{
+font-weight:bold;
+display:block;
+margin-top:10px;
+}
+
+textarea,input,select{
+width:100%;
+padding:10px;
+margin-top:5px;
+border-radius:5px;
+border:1px solid #ccc;
+}
+
+button{
+margin-top:20px;
+padding:12px 20px;
+background:#1e88e5;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+font-size:16px;
+}
+
+button:hover{
+background:#1565c0;
+}
+
+.result{
+margin-top:20px;
+padding:15px;
+background:#e3f2fd;
+border-radius:8px;
+}
+
+.warning{
+background:#ffebee;
+color:#b71c1c;
+padding:15px;
+border-radius:8px;
+font-weight:bold;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Home Cure Assistant</h1>
+<p style="text-align:center;">Treat minor health problems safely at home</p>
+
+
+<div class="card">
+
+<h3>Step 1 — Enter Symptoms</h3>
+
+<label>Describe your symptoms</label>
+<textarea id="symptoms" placeholder="Example: cough, mild fever, sore throat"></textarea>
+
+<label>Duration of symptoms</label>
+<select id="duration">
+<option>Less than 1 day</option>
+<option>1-3 days</option>
+<option>More than 3 days</option>
+</select>
+
+<label>Severity level</label>
+<select id="severity">
+<option>Mild</option>
+<option>Moderate</option>
+<option>Severe</option>
+</select>
+
+<label>Existing medical condition</label>
+<select id="condition">
+<option>No</option>
+<option>Diabetes</option>
+<option>Heart disease</option>
+<option>Asthma</option>
+</select>
+
+<label>Previous treatment taken?</label>
+<input type="text" id="treatment" placeholder="Example: paracetamol">
+
+</div>
+
+
+<div class="card">
+
+<h3>Step 2 — Upload Medicine Photo</h3>
+
+<p>Capture a clear photo of the medicine package.</p>
+
+<ul>
+<li>medicine name visible</li>
+<li>dosage information</li>
+<li>expiry date</li>
+<li>back label details</li>
+</ul>
+
+<input type="file" id="medicineImage">
+
+</div>
+
+
+<button onclick="analyzeSymptoms()">Analyze Health</button>
+
+
+<div id="output"></div>
+
+</div>
+
+
+<script>
+
+function analyzeSymptoms(){
+
+let symptoms=document.getElementById("symptoms").value.toLowerCase();
+let duration=document.getElementById("duration").value;
+let severity=document.getElementById("severity").value;
+
+let output=document.getElementById("output");
+
+
+
+if(symptoms.includes("chest pain") ||
+symptoms.includes("breathing") ||
+severity==="Severe" ||
+duration==="More than 3 days")
+{
+
+output.innerHTML=`
+<div class="warning">
+
+⚠ Serious symptoms detected.
+
+Please consult a doctor immediately.
+
+Emergency Actions:
+
+• Visit nearest hospital  
+• Contact emergency services  
+• Book doctor consultation  
+
+</div>
+`;
+
+return;
+}
+
+
+
+let remedies="";
+let condition="Mild Condition";
+let medicine="Paracetamol";
+
+
+
+if(symptoms.includes("cough") || symptoms.includes("cold"))
+{
+remedies=`
+
+<h3>Recommended Home Remedies</h3>
+
+<ul>
+<li>Warm steam inhalation</li>
+<li>Drink ginger tea</li>
+<li>Honey with warm water</li>
+<li>Stay hydrated</li>
+</ul>
+
+`;
+}
+
+
+
+else if(symptoms.includes("fever"))
+{
+
+remedies=`
+
+<h3>Recommended Home Remedies</h3>
+
+<ul>
+<li>Drink plenty of fluids</li>
+<li>Take rest</li>
+<li>Cold compress</li>
+</ul>
+
+`;
+
+}
+
+
+
+else if(symptoms.includes("headache"))
+{
+
+remedies=`
+
+<h3>Recommended Home Remedies</h3>
+
+<ul>
+<li>Rest in a dark room</li>
+<li>Drink water</li>
+<li>Light head massage</li>
+</ul>
+
+`;
+
+}
+
+
+
+else{
+
+remedies=`
+
+<h3>Recommended Home Remedies</h3>
+
+<ul>
+<li>Rest properly</li>
+<li>Drink warm fluids</li>
+<li>Monitor symptoms</li>
+</ul>
+
+`;
+
+}
+
+
+
+output.innerHTML=`
+
+<div class="result">
+
+<h2>Condition Assessment</h2>
+
+<p><b>Condition Level:</b> ${condition}</p>
+
+<p><b>Possible Cause:</b> Common viral symptoms</p>
+
+${remedies}
+
+
+<h3>Medicine Guidance</h3>
+
+<p><b>Detected Medicine:</b> ${medicine}</p>
+
+<p>Suggested dosage: 1 tablet after meals if fever persists.</p>
+
+</div>
+
+`;
+
+}
+
+</script>
+
+</body>
+</html>

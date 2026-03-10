@@ -5,1339 +5,1719 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HealthConnect AI - Healthcare Platform</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        :root {
-            --primary: #2c3e50;
-            --secondary: #3498db;
-            --accent: #e74c3c;
-            --light: #ecf0f1;
-            --dark: #2c3e50;
-            --success: #27ae60;
-            --warning: #f39c12;
-            --danger: #e74c3c;
-            --white: #ffffff;
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            --border-radius: 8px;
-        }
+:root {
+    --primary: #2c3e50;
+    --secondary: #3498db;
+    --accent: #e74c3c;
+    --light: #ecf0f1;
+    --dark: #2c3e50;
+    --success: #27ae60;
+    --warning: #f39c12;
+    --danger: #e74c3c;
+    --white: #ffffff;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --border-radius: 8px;
+}
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            line-height: 1.6;
-            color: var(--dark);
-            background-color: #f5f5f5;
-        }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    line-height: 1.6;
+    color: var(--dark);
+    background-color: #f5f5f5;
+}
 
-        .app {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
+.app {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
 
-        /* Navigation */
-        .navbar {
-            background-color: var(--white);
-            padding: 1rem 2rem;
-            box-shadow: var(--shadow);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
+/* Navigation */
+.navbar {
+    background-color: var(--white);
+    padding: 1rem 2rem;
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
 
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--primary);
-            text-decoration: none;
-        }
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary);
+    text-decoration: none;
+    cursor: pointer;
+}
 
-        .logo span {
-            color: var(--secondary);
-        }
+.logo span {
+    color: var(--secondary);
+}
 
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-            flex-wrap: wrap;
-        }
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
 
-        .nav-links a {
-            text-decoration: none;
-            color: var(--dark);
-            font-weight: 500;
-            transition: color 0.3s;
-        }
+.nav-links a,
+.nav-links button {
+    text-decoration: none;
+    color: var(--dark);
+    font-weight: 500;
+    transition: color 0.3s;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
 
-        .nav-links a:hover {
-            color: var(--secondary);
-        }
+.nav-links a:hover,
+.nav-links button:hover {
+    color: var(--secondary);
+}
 
-        .btn {
-            padding: 0.5rem 1rem;
-            border: none;
-            border-radius: var(--border-radius);
-            cursor: pointer;
-            font-size: 1rem;
-            transition: all 0.3s;
-            text-decoration: none;
-            display: inline-block;
-        }
+/* Buttons */
+.btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-block;
+}
 
-        .btn-primary {
-            background-color: var(--secondary);
-            color: var(--white);
-        }
+.btn-primary {
+    background-color: var(--secondary);
+    color: var(--white);
+}
 
-        .btn-primary:hover {
-            background-color: #2980b9;
-        }
+.btn-primary:hover {
+    background-color: #2980b9;
+}
 
-        .btn-outline {
-            border: 2px solid var(--secondary);
-            background: transparent;
-            color: var(--secondary);
-        }
+.btn-outline {
+    border: 2px solid var(--secondary);
+    background: transparent;
+    color: var(--secondary);
+}
 
-        .btn-outline:hover {
-            background-color: var(--secondary);
-            color: var(--white);
-        }
+.btn-outline:hover {
+    background-color: var(--secondary);
+    color: var(--white);
+}
 
-        .btn-danger {
-            background-color: var(--danger);
-            color: var(--white);
-        }
+.btn-danger {
+    background-color: var(--danger);
+    color: var(--white);
+}
 
-        .btn-danger:hover {
-            background-color: #c0392b;
-        }
+.btn-danger:hover {
+    background-color: #c0392b;
+}
 
-        /* Main Content */
-        .container {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 2rem;
-            flex: 1;
-        }
+/* Main Content */
+.container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+    flex: 1;
+}
 
-        /* Footer */
-        .footer {
-            background-color: var(--primary);
-            color: var(--white);
-            padding: 2rem;
-            margin-top: auto;
-        }
+/* Footer */
+.footer {
+    background-color: var(--primary);
+    color: var(--white);
+    padding: 2rem;
+    margin-top: auto;
+}
 
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            text-align: center;
-        }
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
 
-        /* Cards */
-        .card {
-            background-color: var(--white);
-            border-radius: var(--border-radius);
-            padding: 1.5rem;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s;
-        }
+/* Cards */
+.card {
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s;
+}
 
-        .card:hover {
-            transform: translateY(-5px);
-        }
+.card:hover {
+    transform: translateY(-5px);
+}
 
-        /* Forms */
-        .form-group {
-            margin-bottom: 1rem;
-        }
+/* Forms */
+.form-group {
+    margin-bottom: 1rem;
+}
 
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-        }
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
 
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #ddd;
-            border-radius: var(--border-radius);
-            font-size: 1rem;
-        }
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+}
 
-        .form-group input:focus {
-            outline: none;
-            border-color: var(--secondary);
-        }
+.form-group input:focus {
+    outline: none;
+    border-color: var(--secondary);
+}
 
-        /* Grid */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
+/* Grid */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
 
-        /* Alert */
-        .alert {
-            padding: 1rem;
-            border-radius: var(--border-radius);
-            margin-bottom: 1rem;
-        }
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 4rem 0;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: var(--white);
+    border-radius: var(--border-radius);
+    margin-bottom: 2rem;
+}
 
-        .alert-success {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
 
-        .alert-warning {
-            background-color: #fff3cd;
-            color: #856404;
-            border: 1px solid #ffeeba;
-        }
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
 
-        .alert-danger {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
+/* Features */
+.feature-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
 
-        /* Hero Section */
-        .hero {
-            text-align: center;
-            padding: 4rem 0;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: var(--white);
-            border-radius: var(--border-radius);
-            margin-bottom: 2rem;
-        }
+/* Progress Bar */
+.progress-bar {
+    background-color: #ddd;
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 2rem 0;
+}
 
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
+.progress-fill {
+    background-color: var(--secondary);
+    height: 100%;
+    transition: width 0.3s;
+}
 
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-        }
+/* Step Indicator */
+.step-indicator {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    gap: 1rem;
+}
 
-        /* Features */
-        .feature-icon {
-            font-size: 2.5rem;
-            color: var(--secondary);
-            margin-bottom: 1rem;
-        }
+.step {
+    flex: 1;
+    padding: 1rem;
+    text-align: center;
+    background-color: #ddd;
+    border-radius: var(--border-radius);
+    font-weight: 500;
+    transition: all 0.3s;
+}
 
-        /* Symptom Checker */
-        .symptom-input {
-            width: 100%;
-            padding: 1rem;
-            border: 2px solid var(--secondary);
-            border-radius: var(--border-radius);
-            font-size: 1rem;
-            margin-bottom: 1rem;
-        }
+.step.active {
+    background-color: var(--secondary);
+    color: var(--white);
+}
 
-        .symptom-results {
-            margin-top: 2rem;
-            padding: 1rem;
-            background-color: var(--light);
-            border-radius: var(--border-radius);
-        }
+/* Radio Group */
+.radio-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin: 1rem 0;
+}
 
-        /* Progress Bar */
-        .progress-bar {
-            width: 100%;
-            height: 10px;
-            background-color: var(--light);
-            border-radius: 5px;
-            margin-bottom: 2rem;
-            overflow: hidden;
-        }
+.radio-group label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    border: 2px solid #ddd;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: all 0.3s;
+}
 
-        .progress-fill {
-            height: 100%;
-            background-color: var(--secondary);
-            transition: width 0.3s ease;
-        }
+.radio-group label:hover {
+    border-color: var(--secondary);
+}
 
-        /* Step Indicator */
-        .step-indicator {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 2rem;
-            padding: 1rem;
-            background-color: var(--white);
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-        }
+/* Symptom Input */
+.symptom-input {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid var(--secondary);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
 
-        .step {
-            flex: 1;
-            text-align: center;
-            padding: 0.5rem;
-            border-bottom: 3px solid var(--light);
-            font-weight: 500;
-        }
+.symptom-results {
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: var(--light);
+    border-radius: var(--border-radius);
+}
 
-        .step.active {
-            border-bottom-color: var(--secondary);
-            color: var(--secondary);
-        }
+/* Alert */
+.alert {
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    margin-bottom: 1rem;
+}
 
-        /* Risk Score */
-        .risk-score {
-            font-size: 3rem;
-            font-weight: bold;
-            text-align: center;
-            margin: 1rem 0;
-        }
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
 
-        .risk-low { color: var(--success); }
-        .risk-moderate { color: var(--warning); }
-        .risk-high { color: var(--danger); }
+.alert-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
 
-        /* Checkbox Group */
-        .checkbox-group {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1rem;
-            margin: 1rem 0;
-        }
+/* Responsive */
+@media (max-width: 768px) {
+    .nav-container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .hero h1 {
+        font-size: 2rem;
+    }
+    
+    .step-indicator {
+        flex-wrap: wrap;
+    }
+}
 
-        .checkbox-group label {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem;
-            background-color: var(--light);
-            border-radius: var(--border-radius);
-            cursor: pointer;
-        }
-
-        /* Slider */
-        .slider-container {
-            margin: 2rem 0;
-        }
-
-        .slider {
-            width: 100%;
-            height: 8px;
-            border-radius: 4px;
-            background: linear-gradient(to right, var(--success), var(--warning), var(--danger));
-            outline: none;
-            appearance: none;
-            -webkit-appearance: none;
-        }
-
-        .slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: var(--secondary);
-            cursor: pointer;
-            border: 2px solid var(--white);
-            box-shadow: var(--shadow);
-        }
-
-        .severity-labels {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 0.5rem;
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        /* Action Buttons */
-        .action-buttons {
-            display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .action-buttons .btn {
-            flex: 1;
-            min-width: 150px;
-            text-align: center;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-container {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            
-            .nav-links {
-                justify-content: center;
-            }
-            
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .step-indicator {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-
-            .action-buttons {
-                flex-direction: column;
-            }
-        }
-    </style>
-    <!-- React and React DOM -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
-    <!-- React Router -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-router-dom/6.8.1/react-router-dom.production.min.js"></script>
-    <!-- Babel -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+</style>
 </head>
 <body>
     <div id="root"></div>
-
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+    
     <script type="text/babel">
-        const { useState, useEffect } = React;
-        const { BrowserRouter, Routes, Route, Link, useNavigate, Navigate } = ReactRouterDOM;
+const { useState } = React;
 
-        // Mock Data
-        const mockDoctors = [
-            { id: 1, name: "Dr. Sarah Johnson", specialization: "Cardiologist", hospital: "City General Hospital", rating: 4.8, availability: ["10:00 AM", "2:00 PM", "4:00 PM"] },
-            { id: 2, name: "Dr. Michael Chen", specialization: "Neurologist", hospital: "St. Mary's Medical Center", rating: 4.9, availability: ["9:00 AM", "11:00 AM", "3:00 PM"] },
-            { id: 3, name: "Dr. Emily Williams", specialization: "Pediatrician", hospital: "Children's Health Center", rating: 4.7, availability: ["10:30 AM", "1:00 PM", "4:30 PM"] },
-            { id: 4, name: "Dr. James Brown", specialization: "Orthopedic", hospital: "Sports Medicine Institute", rating: 4.6, availability: ["8:00 AM", "12:00 PM", "2:30 PM"] },
-            { id: 5, name: "Dr. Lisa Anderson", specialization: "Dermatologist", hospital: "Skin Care Clinic", rating: 4.8, availability: ["9:30 AM", "1:30 PM", "3:30 PM"] },
-            { id: 6, name: "Dr. Robert Taylor", specialization: "General Physician", hospital: "Family Health Center", rating: 4.5, availability: ["8:30 AM", "11:30 AM", "4:00 PM"] },
-            { id: 7, name: "Dr. Maria Garcia", specialization: "Pulmonologist", hospital: "Respiratory Care Center", rating: 4.7, availability: ["9:00 AM", "1:00 PM", "3:30 PM"] }
-        ];
+// Mock Data
+const mockDoctors = [
+    { id: 1, name: "Dr. Sarah Johnson", specialization: "Cardiologist", hospital: "City General Hospital", rating: 4.8, availability: ["10:00 AM", "2:00 PM", "4:00 PM"] },
+    { id: 2, name: "Dr. Michael Chen", specialization: "Neurologist", hospital: "St. Mary's Medical Center", rating: 4.9, availability: ["9:00 AM", "11:00 AM", "3:00 PM"] },
+    { id: 3, name: "Dr. Emily Williams", specialization: "Pediatrician", hospital: "Children's Health Center", rating: 4.7, availability: ["10:30 AM", "1:00 PM", "4:30 PM"] },
+    { id: 4, name: "Dr. James Brown", specialization: "Orthopedic", hospital: "Sports Medicine Institute", rating: 4.6, availability: ["8:00 AM", "12:00 PM", "2:30 PM"] },
+    { id: 5, name: "Dr. Lisa Anderson", specialization: "Dermatologist", hospital: "Skin Care Clinic", rating: 4.8, availability: ["9:30 AM", "1:30 PM", "3:30 PM"] },
+    { id: 6, name: "Dr. Robert Taylor", specialization: "General Physician", hospital: "Family Health Center", rating: 4.5, availability: ["8:30 AM", "11:30 AM", "4:00 PM"] }
+];
 
-        const mockHospitals = [
-            { id: 1, name: "City General Hospital", address: "123 Main St", emergency: true, bedsAvailable: 45, rating: 4.5 },
-            { id: 2, name: "St. Mary's Medical Center", address: "456 Oak Ave", emergency: true, bedsAvailable: 30, rating: 4.8 },
-            { id: 3, name: "Children's Health Center", address: "789 Pine St", emergency: false, bedsAvailable: 15, rating: 4.6 },
-            { id: 4, name: "Sports Medicine Institute", address: "321 Elm St", emergency: false, bedsAvailable: 20, rating: 4.4 },
-            { id: 5, name: "University Medical Center", address: "555 College Blvd", emergency: true, bedsAvailable: 60, rating: 4.9 }
-        ];
+const mockHospitals = [
+    { id: 1, name: "City General Hospital", address: "123 Main St", emergency: true, bedsAvailable: 45, rating: 4.5 },
+    { id: 2, name: "St. Mary's Medical Center", address: "456 Oak Ave", emergency: true, bedsAvailable: 30, rating: 4.8 },
+    { id: 3, name: "Children's Health Center", address: "789 Pine St", emergency: false, bedsAvailable: 15, rating: 4.6 },
+    { id: 4, name: "Sports Medicine Institute", address: "321 Elm St", emergency: false, bedsAvailable: 20, rating: 4.4 }
+];
 
-        // Navigation Component
-        const Navigation = ({ user, onLogout }) => {
-            return (
-                <nav className="navbar">
-                    <div className="nav-container">
-                        <Link to="/" className="logo">
-                            Health<span>Connect</span> AI
-                        </Link>
-                        <div className="nav-links">
-                            <Link to="/">Home</Link>
-                            <Link to="/symptom-test">AI Triage Test</Link>
-                            <Link to="/symptoms">Quick Check</Link>
-                            <Link to="/doctors">Doctors</Link>
-                            <Link to="/hospitals">Hospitals</Link>
-                            {user ? (
-                                <>
-                                    <Link to="/appointments">Appointments</Link>
-                                    <Link to={user.type === 'hospital' ? '/dashboard/hospital' : '/dashboard/user'}>
-                                        Dashboard
-                                    </Link>
-                                    <button onClick={onLogout} className="btn btn-outline">Logout</button>
-                                </>
-                            ) : (
-                                <>
-                                    <Link to="/login" className="btn btn-outline">Login</Link>
-                                    <Link to="/register" className="btn btn-primary">Register</Link>
-                                </>
+const mockTimeline = [
+    { id: 1, date: "2026-03-10", type: "Blood Test", title: "Comprehensive Metabolic Panel", result: "Normal" },
+    { id: 2, date: "2026-02-15", type: "Doctor Appointment", title: "Checkup with Dr. Sarah Johnson", result: "Completed" },
+    { id: 3, date: "2026-01-05", type: "Prescription Upload", title: "Amoxicillin 500mg", result: "Added to records" }
+];
+
+const mockFamily = [
+    { id: 1, name: "John Doe", relation: "Father", age: 65 },
+    { id: 2, name: "Jane Doe", relation: "Mother", age: 62 },
+    { id: 3, name: "Jimmy Doe", relation: "Child", age: 12 }
+];
+
+const mockLabs = [
+    { id: 1, name: "Complete Blood Count", type: "Blood Test", price: "$50" },
+    { id: 2, name: "MRI Brain", type: "Imaging", price: "$500" },
+    { id: 3, name: "Chest X-Ray", type: "Imaging", price: "$100" }
+];
+
+// Navigation Component
+const Navigation = ({ user, onLogout, onNavigate }) => {
+    return (
+        <nav className="navbar">
+            <div className="nav-container">
+                <div className="logo" onClick={() => onNavigate('/')}>
+                    Health<span>Connect</span> AI
+                </div>
+                <div className="nav-links">
+                    <a onClick={() => onNavigate('/')}>Home</a>
+                    <a onClick={() => onNavigate('/symptoms')}>Symptom Checker</a>
+                    <a onClick={() => onNavigate('/symptom-test')}>AI Test</a>
+                    <a onClick={() => onNavigate('/doctors')}>Doctors</a>
+                    <a onClick={() => onNavigate('/hospitals')}>Hospitals</a>
+                    {user ? (
+                        <>
+                            <a onClick={() => onNavigate('/appointments')}>Appointments</a>
+                            <a onClick={() => onNavigate('/teleconsultation')}>Teleconsultation</a>
+                            <a onClick={() => onNavigate('/lab-tests')}>Lab Tests</a>
+                            <a onClick={() => onNavigate('/health-timeline')}>Health Timeline</a>
+                            <a onClick={() => onNavigate('/emergency-profile')} style={{ color: 'var(--danger)', fontWeight: 'bold' }}>Emergency Profile</a>
+                            <a onClick={() => onNavigate('/dashboard')}>Dashboard</a>
+                            <button onClick={onLogout} className="btn btn-outline">Logout</button>
+                        </>
+                    ) : (
+                        <>
+                            <a onClick={() => onNavigate('/login')} className="btn btn-outline">Login</a>
+                            <a onClick={() => onNavigate('/register')} className="btn btn-primary">Register</a>
+                        </>
+                    )}
+                </div>
+            </div>
+        </nav>
+    );
+};
+
+// Footer Component
+const Footer = () => {
+    return (
+        <footer className="footer">
+            <div className="footer-content">
+                <p>&copy; 2026 HealthConnect AI. All rights reserved.</p>
+                <p style={{ marginTop: '1rem', fontSize: '0.9rem' }}>
+                    Emergency: Call 911 for immediate medical assistance
+                </p>
+            </div>
+        </footer>
+    );
+};
+
+// Home Page
+const HomePage = ({ onNavigate }) => {
+    return (
+        <div className="container">
+            <div className="hero" style={{
+                display: 'grid', gridTemplateColumns: 'minmax(300px, 1fr) minmax(300px, 1fr)',
+                gap: '2rem', alignItems: 'center', textAlign: 'left', padding: '3rem 4rem',
+                background: 'linear-gradient(135deg, var(--primary), var(--secondary))', color: 'white', borderRadius: 'var(--border-radius)'
+            }}>
+                <div>
+                    <h1 style={{ fontSize: '3rem', marginBottom: '1.5rem', lineHeight: '1.2' }}>Your AI-Powered <br /> Healthcare Assistant</h1>
+                    <p style={{ fontSize: '1.2rem', marginBottom: '2rem', opacity: '0.9' }}>Find the right doctor, check symptoms, and manage your health seamlessly in India.</p>
+                    <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+                        <button onClick={() => onNavigate('/symptom-test')} className="btn btn-primary" style={{ background: 'var(--accent)', color: 'white', border: 'none' }}>
+                            Start AI Symptom Test
+                        </button>
+                        <button onClick={() => onNavigate('/symptoms')} className="btn btn-outline" style={{ borderColor: 'white', color: 'white' }}>
+                            Quick Symptom Check
+                        </button>
+                    </div>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'center', position: 'relative' }}>
+                    <img src="./doctor.png" alt="Indian Doctor helping patient" style={{ width: '100%', maxWidth: '450px', borderRadius: '12px', boxShadow: '0 10px 25px rgba(0,0,0,0.2)', objectFit: 'cover', height: '350px' }} />
+                </div>
+            </div>
+
+            <h2 style={{ textAlign: 'center', margin: '4rem 0 2rem' }}>Our Services</h2>
+            <div className="grid">
+                <div className="card" onClick={() => onNavigate('/teleconsultation')} style={{ cursor: 'pointer' }}>
+                    <div className="feature-icon">💻</div>
+                    <h3>Telemedicine</h3>
+                    <p>Consult with doctors remotely via video and chat.</p>
+                </div>
+                <div className="card" onClick={() => onNavigate('/lab-tests')} style={{ cursor: 'pointer' }}>
+                    <div className="feature-icon">🧪</div>
+                    <h3>Lab Tests</h3>
+                    <p>Book diagnostic tests like MRI, CBC, and X-Rays easily.</p>
+                </div>
+                <div className="card" onClick={() => onNavigate('/pharmacy')} style={{ cursor: 'pointer' }}>
+                    <div className="feature-icon">💊</div>
+                    <h3>Pharmacy</h3>
+                    <p>Order medicines online and upload your prescriptions.</p>
+                </div>
+                <div className="card" onClick={() => onNavigate('/health-timeline')} style={{ cursor: 'pointer' }}>
+                    <div className="feature-icon">📅</div>
+                    <h3>Smart Timeline</h3>
+                    <p>View your complete chronological medical history.</p>
+                </div>
+                <div className="card" onClick={() => onNavigate('/health-library')} style={{ cursor: 'pointer' }}>
+                    <div className="feature-icon">📚</div>
+                    <h3>Health Library</h3>
+                    <p>Access educational resources and disease prevention guides.</p>
+                </div>
+                <div className="card" onClick={() => onNavigate('/health-programs')} style={{ cursor: 'pointer' }}>
+                    <div className="feature-icon">🏃‍♂️</div>
+                    <h3>Health Programs</h3>
+                    <p>Join guided programs for weight loss and diabetes tracking.</p>
+                </div>
+                <div className="card" onClick={() => onNavigate('/family-members')} style={{ cursor: 'pointer' }}>
+                    <div className="feature-icon">👨‍👩‍👧‍👦</div>
+                    <h3>Family Health</h3>
+                    <p>Manage medical records and appointments for your family.</p>
+                </div>
+                <div className="card" onClick={() => onNavigate('/insurance')} style={{ cursor: 'pointer' }}>
+                    <div className="feature-icon">🛡️</div>
+                    <h3>Insurance integration</h3>
+                    <p>Upload your policy to check coverage and claim assistance.</p>
+                </div>
+            </div>
+
+            <h2 style={{ textAlign: 'center', margin: '4rem 0 2rem' }}>Nearby Healthcare Facilities</h2>
+            <div className="card" style={{ padding: 0, overflow: 'hidden', cursor: 'pointer', marginBottom: '4rem', display: 'grid', gridTemplateColumns: '1fr 1fr' }} onClick={() => onNavigate('/health-map')}>
+                <div style={{ background: '#e5e3df', height: '400px', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'background 0.3s' }} onMouseOver={(e) => e.currentTarget.style.background = '#d5d3cf'} onMouseOut={(e) => e.currentTarget.style.background = '#e5e3df'}>
+                    <div style={{ textAlign: 'center' }}>
+                        <span style={{ fontSize: '4rem' }}>🗺️</span>
+                        <h3 style={{ margin: '1rem 0 0.5rem' }}>Interactive Health Map</h3>
+                        <p style={{ color: '#555', maxWidth: '300px', margin: '0 auto' }}>Navigate locally to hospitals, clinics, and pharmacies with real-time routing.</p>
+                        <button className="btn btn-primary" style={{ marginTop: '1.5rem' }}>Open Full Map</button>
+                    </div>
+                </div>
+                <div style={{ height: '400px', overflow: 'hidden' }}>
+                    <img src="./hospital.png" alt="Modern Indian Hospital" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                </div>
+            </div>
+        </div>
+    );
+};
+
+// Login Page
+const LoginPage = ({ onLogin, onNavigate }) => {
+    const [formData, setFormData] = useState({ email: '', password: '', userType: 'patient' });
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        onLogin({
+            name: formData.email.split('@')[0],
+            email: formData.email,
+            type: formData.userType
+        });
+        onNavigate('/dashboard');
+    };
+
+    return (
+        <div className="container">
+            <div style={{ maxWidth: '400px', margin: '0 auto' }}>
+                <h2 style={{ textAlign: 'center', marginBottom: '2rem' }}>Login to HealthConnect AI</h2>
+                <div className="card">
+                    <form onSubmit={handleSubmit}>
+                        <div className="form-group">
+                            <label>Login as</label>
+                            <select
+                                value={formData.userType}
+                                onChange={(e) => setFormData({ ...formData, userType: e.target.value })}
+                            >
+                                <option value="patient">Patient</option>
+                                <option value="hospital">Hospital/Provider</option>
+                            </select>
+                        </div>
+                        <div className="form-group">
+                            <label>Email</label>
+                            <input
+                                type="email"
+                                value={formData.email}
+                                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                required
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>Password</label>
+                            <input
+                                type="password"
+                                value={formData.password}
+                                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                                required
+                            />
+                        </div>
+                        <button type="submit" className="btn btn-primary" style={{ width: '100%' }}>
+                            Login
+                        </button>
+                    </form>
+                    <p style={{ textAlign: 'center', marginTop: '1rem' }}>
+                        Don't have an account? <a onClick={() => onNavigate('/register')} style={{ color: 'var(--secondary)', cursor: 'pointer' }}>Register here</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+// Register Page
+const RegisterPage = ({ onLogin, onNavigate }) => {
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+        userType: 'patient'
+    });
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (formData.password !== formData.confirmPassword) {
+            alert("Passwords don't match!");
+            return;
+        }
+        onLogin({
+            name: formData.name,
+            email: formData.email,
+            type: formData.userType
+        });
+        onNavigate('/dashboard');
+    };
+
+    return (
+        <div className="container">
+            <div style={{ maxWidth: '400px', margin: '0 auto' }}>
+                <h2 style={{ textAlign: 'center', marginBottom: '2rem' }}>Create Account</h2>
+                <div className="card">
+                    <form onSubmit={handleSubmit}>
+                        <div className="form-group">
+                            <label>Register as</label>
+                            <select
+                                value={formData.userType}
+                                onChange={(e) => setFormData({ ...formData, userType: e.target.value })}
+                            >
+                                <option value="patient">Patient</option>
+                                <option value="hospital">Hospital/Provider</option>
+                            </select>
+                        </div>
+                        <div className="form-group">
+                            <label>Full Name</label>
+                            <input
+                                type="text"
+                                value={formData.name}
+                                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                                required
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>Email</label>
+                            <input
+                                type="email"
+                                value={formData.email}
+                                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                required
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>Password</label>
+                            <input
+                                type="password"
+                                value={formData.password}
+                                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                                required
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label>Confirm Password</label>
+                            <input
+                                type="password"
+                                value={formData.confirmPassword}
+                                onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
+                                required
+                            />
+                        </div>
+                        <button type="submit" className="btn btn-primary" style={{ width: '100%' }}>
+                            Register
+                        </button>
+                    </form>
+                    <p style={{ textAlign: 'center', marginTop: '1rem' }}>
+                        Already have an account? <a onClick={() => onNavigate('/login')} style={{ color: 'var(--secondary)', cursor: 'pointer' }}>Login here</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+// AI Symptom Triage Test Page
+const SymptomTriageTestPage = ({ onNavigate }) => {
+    const [step, setStep] = useState(1);
+    const [answers, setAnswers] = useState({
+        symptom: "",
+        duration: "",
+        severity: 5,
+        associated: [],
+        history: ""
+    });
+    const [analysis, setAnalysis] = useState(null);
+    const [loading, setLoading] = useState(false);
+
+    const handleNext = () => {
+        if (step < 5) setStep(step + 1);
+        else analyzeData();
+    };
+
+    const handlePrev = () => {
+        if (step > 1) setStep(step - 1);
+    };
+
+    const analyzeData = () => {
+        setLoading(true);
+        setTimeout(() => {
+            const specializations = {
+                'chest': 'Cardiologist', 'heart': 'Cardiologist',
+                'head': 'Neurologist', 'migraine': 'Neurologist',
+                'skin': 'Dermatologist', 'rash': 'Dermatologist',
+                'joint': 'Orthopedic', 'bone': 'Orthopedic'
+            };
+
+            let spec = 'General Physician';
+            for (const [key, value] of Object.entries(specializations)) {
+                if (answers.symptom.toLowerCase().includes(key)) {
+                    spec = value;
+                    break;
+                }
+            }
+
+            const riskScore = Math.min(100, (parseInt(answers.severity) || 0) * 12 + (answers.duration === 'days' ? 20 : answers.duration === 'weeks' ? 25 : 10));
+            const urgency = riskScore >= 70 ? 'High' : riskScore >= 40 ? 'Medium' : 'Low';
+
+            const resultObj = {
+                specialization: spec,
+                riskScore,
+                urgency,
+                recommendations: [
+                    `Severity Level: ${answers.severity}/10`,
+                    `Duration: ${answers.duration || 'Not specified'}`,
+                    `Risk Score: ${riskScore}%`,
+                    `Priority: ${urgency}`,
+                    `Associated Symptoms: ${answers.associated.join(', ') || 'None'}`
+                ]
+            };
+            setAnalysis(resultObj);
+            localStorage.setItem('triageResult', JSON.stringify(resultObj));
+            setLoading(false);
+        }, 1500);
+    };
+
+    const handleReset = () => {
+        setStep(1);
+        setAnswers({ symptom: "", duration: "", severity: 5, associated: [], history: "" });
+        setAnalysis(null);
+    };
+
+    const progressPercentage = (step / 5) * 100;
+
+    if (analysis) {
+        return (
+            <div className="container">
+                <h2 style={{ marginBottom: '2rem' }}>AI Triage Results</h2>
+                <div className="card">
+                    <h3>Assessment Complete</h3>
+                    <p>
+                        <strong>Recommended Specialist:</strong> {analysis.specialization}
+                    </p>
+                    <p>
+                        <strong>Risk Score:</strong>
+                        <span style={{
+                            color: analysis.riskScore >= 70 ? 'var(--danger)' :
+                                analysis.riskScore >= 40 ? 'var(--warning)' :
+                                    'var(--success)',
+                            marginLeft: '0.5rem',
+                            fontWeight: 'bold',
+                            fontSize: '1.2rem'
+                        }}>
+                            {analysis.riskScore}%
+                        </span>
+                    </p>
+                    <h4 style={{ marginTop: '1rem' }}>Assessment Details:</h4>
+                    <ul style={{ marginLeft: '1.5rem' }}>
+                        {analysis.recommendations.map((rec, i) => (
+                            <li key={i}>{rec}</li>
+                        ))}
+                    </ul>
+                    <div style={{ display: 'flex', gap: '1rem', marginTop: '2rem', flexWrap: 'wrap' }}>
+                        <button onClick={() => onNavigate('/recommended-doctors')} className="btn btn-primary">
+                            View Recommended Doctors
+                        </button>
+                        <button onClick={() => onNavigate('/hospitals')} className="btn btn-outline">
+                            Find Nearby Hospital
+                        </button>
+                        {analysis.riskScore >= 70 && (
+                            <button className="btn btn-danger" onClick={() => alert('Emergency services number: 911')}>
+                                🚑 Emergency Call
+                            </button>
+                        )}
+                        <button onClick={handleReset} className="btn btn-outline">
+                            Start Over
+                        </button>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    return (
+        <div className="container">
+            <h2 style={{ marginBottom: '2rem' }}>AI Symptom Triage Assessment</h2>
+
+            <div className="progress-bar">
+                <div className="progress-fill" style={{ width: `${progressPercentage}%` }}></div>
+            </div>
+
+            <div className="step-indicator">
+                <div className={`step ${step >= 1 ? 'active' : ''}`}>1. Main Symptom</div>
+                <div className={`step ${step >= 2 ? 'active' : ''}`}>2. Duration</div>
+                <div className={`step ${step >= 3 ? 'active' : ''}`}>3. Severity</div>
+                <div className={`step ${step >= 4 ? 'active' : ''}`}>4. Associated</div>
+                <div className={`step ${step >= 5 ? 'active' : ''}`}>5. History</div>
+            </div>
+
+            <div className="card">
+                {step === 1 && (
+                    <>
+                        <h3>What's your main symptom?</h3>
+                        <input
+                            type="text"
+                            className="form-input"
+                            placeholder="e.g., Chest pain, headache, fever..."
+                            value={answers.symptom}
+                            onChange={(e) => setAnswers({ ...answers, symptom: e.target.value })}
+                            style={{ width: '100%', padding: '0.75rem', marginBottom: '1rem', border: '1px solid #ddd', borderRadius: 'var(--border-radius)' }}
+                        />
+                    </>
+                )}
+
+                {step === 2 && (
+                    <>
+                        <h3>How long have you had this?</h3>
+                        <div className="radio-group">
+                            {['minutes', 'hours', 'days', 'weeks'].map(option => (
+                                <label key={option}>
+                                    <input
+                                        type="radio"
+                                        name="duration"
+                                        value={option}
+                                        checked={answers.duration === option}
+                                        onChange={(e) => setAnswers({ ...answers, duration: e.target.value })}
+                                    />
+                                    {option.charAt(0).toUpperCase() + option.slice(1)}
+                                </label>
+                            ))}
+                        </div>
+                    </>
+                )}
+
+                {step === 3 && (
+                    <>
+                        <h3>Rate your pain/severity (1-10)</h3>
+                        <input
+                            type="range"
+                            min="1"
+                            max="10"
+                            value={answers.severity}
+                            onChange={(e) => setAnswers({ ...answers, severity: parseInt(e.target.value) })}
+                            style={{ width: '100%', marginBottom: '1rem' }}
+                        />
+                        <p style={{ textAlign: 'center', fontSize: '1.5rem', fontWeight: 'bold' }}>{answers.severity}/10</p>
+                    </>
+                )}
+
+                {step === 4 && (
+                    <>
+                        <h3>Any associated symptoms?</h3>
+                        {['fever', 'fatigue', 'nausea', 'dizziness'].map(symptom => (
+                            <label key={symptom} style={{ display: 'block', margin: '0.75rem 0', cursor: 'pointer' }}>
+                                <input
+                                    type="checkbox"
+                                    checked={answers.associated.includes(symptom)}
+                                    onChange={(e) => {
+                                        if (e.target.checked) {
+                                            setAnswers({ ...answers, associated: [...answers.associated, symptom] });
+                                        } else {
+                                            setAnswers({ ...answers, associated: answers.associated.filter(s => s !== symptom) });
+                                        }
+                                    }}
+                                />
+                                {' ' + symptom.charAt(0).toUpperCase() + symptom.slice(1)}
+                            </label>
+                        ))}
+                    </>
+                )}
+
+                {step === 5 && (
+                    <>
+                        <h3>Any relevant medical history?</h3>
+                        <textarea
+                            placeholder="e.g., Diabetes, high blood pressure..."
+                            rows="4"
+                            value={answers.history}
+                            onChange={(e) => setAnswers({ ...answers, history: e.target.value })}
+                            style={{ width: '100%', padding: '0.75rem', border: '1px solid #ddd', borderRadius: 'var(--border-radius)', fontFamily: 'inherit' }}
+                        />
+                    </>
+                )}
+
+                <div style={{ display: 'flex', gap: '1rem', marginTop: '2rem', justifyContent: 'space-between' }}>
+                    <button
+                        onClick={handlePrev}
+                        disabled={step === 1}
+                        className="btn btn-outline"
+                        style={{ flex: 1 }}
+                    >
+                        Previous
+                    </button>
+                    <button
+                        onClick={handleNext}
+                        disabled={!answers.symptom && step === 1}
+                        className="btn btn-primary"
+                        style={{ flex: 1 }}
+                    >
+                        {step === 5 ? 'Get Results' : 'Next'}
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+// Quick Symptom Checker Page
+const QuickSymptomCheckerPage = ({ onNavigate }) => {
+    const [symptoms, setSymptoms] = useState('');
+    const [analysis, setAnalysis] = useState(null);
+    const [loading, setLoading] = useState(false);
+
+    const analyzeSymptoms = (symptoms) => {
+        const symptomLower = symptoms.toLowerCase();
+
+        if (symptomLower.includes('chest') || symptomLower.includes('heart') || symptomLower.includes('breath')) {
+            return {
+                specialization: 'Cardiologist',
+                urgency: 'High - Please seek immediate medical attention if severe',
+                recommendations: ['Visit nearest emergency room', 'Avoid physical exertion', 'Book cardiology appointment']
+            };
+        } else if (symptomLower.includes('head') || symptomLower.includes('migraine') || symptomLower.includes('dizzy')) {
+            return {
+                specialization: 'Neurologist',
+                urgency: 'Medium',
+                recommendations: ['Rest in dark room', 'Stay hydrated', 'Consult neurologist']
+            };
+        } else if (symptomLower.includes('skin') || symptomLower.includes('rash') || symptomLower.includes('itch')) {
+            return {
+                specialization: 'Dermatologist',
+                urgency: 'Low to Medium',
+                recommendations: ['Avoid scratching', 'Use gentle skin products', 'Book dermatology appointment']
+            };
+        } else if (symptomLower.includes('pain') || symptomLower.includes('joint') || symptomLower.includes('bone')) {
+            return {
+                specialization: 'Orthopedic',
+                urgency: 'Medium',
+                recommendations: ['Rest affected area', 'Apply ice if swollen', 'Consult orthopedic specialist']
+            };
+        } else {
+            return {
+                specialization: 'General Physician',
+                urgency: 'Low to Medium',
+                recommendations: ['Monitor symptoms', 'Rest adequately', 'Consult general physician']
+            };
+        }
+    };
+
+    const handleAnalyze = () => {
+        setLoading(true);
+        setTimeout(() => {
+            const result = analyzeSymptoms(symptoms);
+            setAnalysis(result);
+            setLoading(false);
+        }, 1000);
+    };
+
+    return (
+        
+        <div className="container">
+            <h2 style={{ marginBottom: '2rem' }}>Quick Symptom Checker</h2>
+            <div className="grid">
+                <div className="card">
+                    <h3>Describe Your Symptoms</h3>
+                    <textarea
+                        className="symptom-input"
+                        rows="6"
+                        placeholder="Describe your symptoms in detail..."
+                        value={symptoms}
+                        onChange={(e) => setSymptoms(e.target.value)}
+                    />
+                    <button
+                        onClick={handleAnalyze}
+                        className="btn btn-primary"
+                        disabled={!symptoms || loading}
+                        style={{ width: '100%' }}
+                    >
+                        {loading ? 'Analyzing...' : 'Analyze Symptoms'}
+                    </button>
+                </div>
+
+                {analysis && (
+                    <div className="card">
+                        <h3>Analysis Results</h3>
+                        <div className="symptom-results">
+                            <p><strong>Recommended Specialist:</strong> {analysis.specialization}</p>
+                            <p><strong>Urgency Level:</strong> {analysis.urgency}</p>
+                            <h4>Recommendations:</h4>
+                            <ul style={{ marginLeft: '1.5rem' }}>
+                                {analysis.recommendations.map((rec, index) => (
+                                    <li key={index}>{rec}</li>
+                                ))}
+                            </ul>
+                            <div style={{ marginTop: '1.5rem' }}>
+                                <button onClick={() => onNavigate('/doctors')} className="btn btn-primary" style={{ marginRight: '1rem' }}>
+                                    Find {analysis.specialization}
+                                </button>
+                                <button onClick={() => onNavigate('/hospitals')} className="btn btn-outline">
+                                    Find Nearby Hospitals
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                )}
+            </div>
+        </div>
+    );
+};
+
+// Doctors Page
+const DoctorsPage = ({ onNavigate }) => {
+    const [searchTerm, setSearchTerm] = useState('');
+    const [selectedSpecialization, setSelectedSpecialization] = useState('all');
+    const [doctors, setDoctors] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    React.useEffect(() => {
+        fetch('http://localhost:8000/api/doctors/')
+            .then(res => res.json())
+            .then(data => {
+                setDoctors(data);
+                setLoading(false);
+            })
+            .catch(err => {
+                console.error("Error fetching doctors:", err);
+                // Fallback to mock data if backend fails
+                setDoctors(mockDoctors);
+                setLoading(false);
+            });
+    }, []);
+
+    const specializations = ['all', ...new Set(doctors.map(d => d.specialization))];
+
+    const filteredDoctors = doctors.filter(doctor => {
+        // Map backend names if user array doesn't match mock exactly
+        const docName = doctor.user ? `Dr. ${doctor.user.first_name} ${doctor.user.last_name}` : doctor.name;
+
+        const matchesSearch = docName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            doctor.hospital.toLowerCase().includes(searchTerm.toLowerCase());
+        const matchesSpecialization = selectedSpecialization === 'all' ||
+            doctor.specialization === selectedSpecialization;
+        return matchesSearch && matchesSpecialization;
+    });
+
+    return (
+        <div className="container">
+            <h2 style={{ marginBottom: '2rem' }}>Find a Doctor</h2>
+
+            <div className="card" style={{ marginBottom: '2rem' }}>
+                <div className="grid" style={{ gridTemplateColumns: '2fr 1fr', gap: '1rem' }}>
+                    <input
+                        type="text"
+                        placeholder="Search by doctor name or hospital..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        style={{ padding: '0.75rem', borderRadius: 'var(--border-radius)', border: '1px solid #ddd' }}
+                    />
+                    <select
+                        value={selectedSpecialization}
+                        onChange={(e) => setSelectedSpecialization(e.target.value)}
+                        style={{ padding: '0.75rem', borderRadius: 'var(--border-radius)', border: '1px solid #ddd' }}
+                    >
+                        {specializations.map(spec => (
+                            <option key={spec} value={spec}>
+                                {spec === 'all' ? 'All Specializations' : spec}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+            </div>
+
+            <div className="grid">
+                {loading ? <p>Loading doctors...</p> : filteredDoctors.map(doctor => {
+                    const docName = doctor.user ? `Dr. ${doctor.user.first_name} ${doctor.user.last_name}` : doctor.name;
+                    return (
+                        <div key={doctor.id} className="card">
+                            <h3>{docName}</h3>
+                            <p><strong>Specialization:</strong> {doctor.specialization}</p>
+                            <p><strong>Hospital:</strong> {doctor.hospital}</p>
+                            <p><strong>Rating:</strong> ⭐ {doctor.rating}/5</p>
+                            <p><strong>Available Today:</strong> {Array.isArray(doctor.availability) ? doctor.availability.join(', ') : 'Not Available'}</p>
+                            <button onClick={() => onNavigate('/appointments')} className="btn btn-primary" style={{ width: '100%' }}>
+                                Book Appointment
+                            </button>
+                        </div>
+                    );
+                })}
+            </div>
+        </div>
+    );
+};
+
+// Hospitals Page
+const HospitalsPage = ({ onNavigate }) => {
+    const [searchTerm, setSearchTerm] = useState('');
+    const [showEmergencyOnly, setShowEmergencyOnly] = useState(false);
+    const [hospitals, setHospitals] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    React.useEffect(() => {
+        fetch('http://localhost:8000/api/hospitals/')
+            .then(res => res.json())
+            .then(data => {
+                setHospitals(data);
+                setLoading(false);
+            })
+            .catch(err => {
+                console.error("Error fetching hospitals:", err);
+                setHospitals(mockHospitals); // fallback to mock
+                setLoading(false);
+            });
+    }, []);
+
+    const filteredHospitals = hospitals.filter(hospital => {
+        const matchesSearch = hospital.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            hospital.address.toLowerCase().includes(searchTerm.toLowerCase());
+        const matchesEmergency = !showEmergencyOnly || hospital.emergency_services || hospital.emergency;
+        return matchesSearch && matchesEmergency;
+    });
+
+    return (
+        <div className="container">
+            <h2 style={{ marginBottom: '2rem' }}>Find Hospitals</h2>
+
+            <div className="card" style={{ marginBottom: '2rem' }}>
+                <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
+                    <input
+                        type="text"
+                        placeholder="Search hospitals by name or location..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        style={{ flex: 1, minWidth: '200px', padding: '0.75rem', borderRadius: 'var(--border-radius)', border: '1px solid #ddd' }}
+                    />
+                    <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                        <input
+                            type="checkbox"
+                            checked={showEmergencyOnly}
+                            onChange={(e) => setShowEmergencyOnly(e.target.checked)}
+                        />
+                        Emergency Services Only
+                    </label>
+                </div>
+            </div>
+
+            <div className="grid">
+                {loading ? <p>Loading hospitals...</p> : filteredHospitals.map(hospital => (
+                    <div key={hospital.id} className="card">
+                        <h3>{hospital.name}</h3>
+                        <p><strong>Address:</strong> {hospital.address}</p>
+                        <p>
+                            <strong>Emergency:</strong>
+                            {hospital.emergency || hospital.emergency_services ? '✅ Available 24/7' : '❌ Not Available'}
+                        </p>
+                        <p><strong>Beds Available:</strong> {hospital.beds_available ?? hospital.bedsAvailable}</p>
+                        <p><strong>Rating:</strong> ⭐ {hospital.rating}/5</p>
+                        <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
+                            <button onClick={() => onNavigate('/appointments')} className="btn btn-primary" style={{ flex: 1 }}>
+                                Book Appointment
+                            </button>
+                            {(hospital.emergency || hospital.emergency_services) && (
+                                <button className="btn btn-danger" style={{ flex: 1 }}>
+                                    Emergency
+                                </button>
                             )}
                         </div>
                     </div>
-                </nav>
-            );
-        };
+                ))}
+            </div>
+        </div>
+    );
+};
 
-        // Footer Component
-        const Footer = () => {
-            return (
-                <footer className="footer">
-                    <div className="footer-content">
-                        <p>&copy; 2024 HealthConnect AI. All rights reserved.</p>
-                        <p style={{ marginTop: '1rem', fontSize: '0.9rem' }}>
-                            Emergency: Call 911 for immediate medical assistance
+// Appointments Page
+const AppointmentsPage = ({ onNavigate }) => {
+    const [appointments] = useState([
+        { id: 1, doctor: "Dr. Sarah Johnson", date: "2026-03-20", time: "10:00 AM", status: "Confirmed", priority: "Low" },
+        { id: 2, doctor: "Dr. Michael Chen", date: "2026-03-22", time: "2:00 PM", status: "Pending", priority: "Medium" }
+    ]);
+
+    return (
+        <div className="container">
+            <h2 style={{ marginBottom: '2rem' }}>My Appointments</h2>
+
+            <div className="card" style={{ marginBottom: '2rem' }}>
+                <h3>Book New Appointment</h3>
+                <div className="grid" style={{ gridTemplateColumns: '2fr 1fr 1fr auto', gap: '1rem' }}>
+                    <select style={{ padding: '0.75rem' }}>
+                        <option>Select Doctor</option>
+                        {mockDoctors.map(doctor => (
+                            <option key={doctor.id}>{doctor.name} - {doctor.specialization}</option>
+                        ))}
+                    </select>
+                    <input type="date" style={{ padding: '0.75rem' }} />
+                    <select style={{ padding: '0.75rem' }}>
+                        <option>Select Time</option>
+                        <option>9:00 AM</option>
+                        <option>10:00 AM</option>
+                        <option>11:00 AM</option>
+                        <option>2:00 PM</option>
+                        <option>3:00 PM</option>
+                        <option>4:00 PM</option>
+                    </select>
+                    <button className="btn btn-primary">Book</button>
+                </div>
+            </div>
+
+            <div className="grid">
+                {appointments.map(appointment => (
+                    <div key={appointment.id} className="card">
+                        <h3>{appointment.doctor}</h3>
+                        <p><strong>Date:</strong> {appointment.date}</p>
+                        <p><strong>Time:</strong> {appointment.time}</p>
+                        <p><strong>Priority Level:</strong>
+                            <span style={{
+                                color: appointment.priority === 'High' ? 'var(--danger)' : appointment.priority === 'Medium' ? 'var(--warning)' : 'var(--success)',
+                                fontWeight: 'bold', marginLeft: '0.5rem'
+                            }}>
+                                {appointment.priority}
+                            </span>
                         </p>
+                        <p>
+                            <strong>Status:</strong>
+                            <span style={{
+                                color: appointment.status === 'Confirmed' ? 'var(--success)' : 'var(--warning)',
+                                marginLeft: '0.5rem'
+                            }}>
+                                {appointment.status}
+                            </span>
+                        </p>
+                        <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
+                            <button className="btn btn-outline" style={{ flex: 1 }}>Reschedule</button>
+                            <button className="btn btn-outline" style={{ flex: 1 }}>Cancel</button>
+                        </div>
                     </div>
-                </footer>
-            );
-        };
+                ))}
+            </div>
+        </div>
+    );
+};
 
-        // AI Triage Logic
-        const performAITriage = (answers) => {
-            const { symptom, duration, severity, associated, history } = answers;
-            
-            // Determine specialization based on symptoms
-            let specialization = "General Physician";
-            let condition = "General";
-            let riskScore = 0;
-            
-            // Specialization logic
-            const symptomLower = symptom.toLowerCase();
-            if (symptomLower.includes('chest') || symptomLower.includes('heart')) {
-                specialization = "Cardiologist";
-                condition = "Cardiovascular";
-                riskScore += 30;
-            } else if (symptomLower.includes('head') || symptomLower.includes('migraine') || symptomLower.includes('dizzy')) {
-                specialization = "Neurologist";
-                condition = "Neurological";
-                riskScore += 20;
-            } else if (symptomLower.includes('skin') || symptomLower.includes('rash')) {
-                specialization = "Dermatologist";
-                condition = "Dermatological";
-                riskScore += 10;
-            } else if (symptomLower.includes('bone') || symptomLower.includes('joint') || symptomLower.includes('muscle')) {
-                specialization = "Orthopedic";
-                condition = "Musculoskeletal";
-                riskScore += 15;
-            } else if (symptomLower.includes('breath') || symptomLower.includes('cough')) {
-                specialization = "Pulmonologist";
-                condition = "Respiratory";
-                riskScore += 25;
-            } else if (symptomLower.includes('stomach') || symptomLower.includes('nausea')) {
-                specialization = "Gastroenterologist";
-                condition = "Gastrointestinal";
-                riskScore += 15;
-            }
+// Dashboard Page
+const DashboardPage = ({ user, onNavigate }) => {
+    const [healthRecords] = useState([
+        { id: 1, date: "2026-03-15", type: "Blood Test", doctor: "Dr. Sarah Johnson", result: "Normal" },
+        { id: 2, date: "2026-03-10", type: "X-Ray", doctor: "Dr. James Brown", result: "Pending" }
+    ]);
 
-            // Duration impact on risk
-            if (duration === "Less than 24 hours") riskScore += 5;
-            else if (duration === "1–3 days") riskScore += 10;
-            else if (duration === "4–7 days") riskScore += 15;
-            else if (duration === "1–4 weeks") riskScore += 20;
-            else if (duration === "More than 1 month") riskScore += 25;
+    return (
+        <div className="container">
+            <h2>Welcome back, {user?.name}!</h2>
 
-            // Severity impact
-            const severityNum = parseInt(severity);
-            riskScore += severityNum * 3;
+            <div className="grid" style={{ marginTop: '2rem' }}>
+                <div className="card">
+                    <h3>Health Summary</h3>
+                    <p><strong>Upcoming Appointments:</strong> 2</p>
+                    <p><strong>Medical Records:</strong> {healthRecords.length}</p>
+                    <p><strong>Last Visit:</strong> 2026-03-15</p>
+                </div>
 
-            // Associated symptoms impact
-            if (associated.includes("Fever")) riskScore += 15;
-            if (associated.includes("Shortness of breath")) riskScore += 25;
-            if (associated.includes("Dizziness")) riskScore += 15;
-            if (associated.includes("Bleeding")) riskScore += 30;
-
-            // History impact
-            if (history === "Currently on medication") riskScore += 10;
-            else if (history === "Previously treated") riskScore += 5;
-
-            // Determine urgency
-            let urgency = "";
-            let urgencyLevel = "";
-            let actionTime = "";
-            
-            if (riskScore >= 70 || severityNum >= 8 || associated.includes("Shortness of breath")) {
-                urgency = "EMERGENCY";
-                urgencyLevel = "Critical";
-                actionTime = "Immediately - Visit ER now";
-            } else if (riskScore >= 50 || severityNum >= 6) {
-                urgency = "URGENT";
-                urgencyLevel = "High";
-                actionTime = "Within 24 hours";
-            } else if (riskScore >= 30) {
-                urgency = "MODERATE";
-                urgencyLevel = "Medium";
-                actionTime = "Within 2-3 days";
-            } else {
-                urgency = "ROUTINE";
-                urgencyLevel = "Low";
-                actionTime = "Schedule an appointment";
-            }
-
-            return {
-                specialization,
-                condition,
-                riskScore: Math.min(100, riskScore),
-                urgency,
-                urgencyLevel,
-                actionTime,
-                recommendations: generateRecommendations(answers, specialization)
-            };
-        };
-
-        const generateRecommendations = (answers, specialization) => {
-            const recs = [];
-            if (answers.severity >= 8) {
-                recs.push("Seek immediate medical attention");
-            }
-            if (answers.associated.includes("Shortness of breath")) {
-                recs.push("Monitor breathing - seek emergency if worsens");
-            }
-            if (answers.duration === "More than 1 month") {
-                recs.push("Schedule a specialist consultation");
-            }
-            recs.push(`Book appointment with ${specialization}`);
-            return recs;
-        };
-
-        // Home Page
-        const HomePage = () => {
-            return (
-                <div className="container">
-                    <div className="hero">
-                        <h1>Your AI-Powered Healthcare Assistant</h1>
-                        <p>Take our AI Triage Test to find the right specialist or check symptoms quickly</p>
-                        <Link to="/symptom-test" className="btn btn-primary" style={{ marginRight: '1rem' }}>
-                            Start AI Triage Test
-                        </Link>
-                        <Link to="/symptoms" className="btn btn-outline">
-                            Quick Symptom Check
-                        </Link>
-                    </div>
-
-                    <h2 style={{ textAlign: 'center', marginBottom: '2rem' }}>Our Services</h2>
-                    <div className="grid">
-                        <div className="card">
-                            <div className="feature-icon">🤖</div>
-                            <h3>AI Triage Test</h3>
-                            <p>5-question clinical assessment to determine specialist and urgency level.</p>
-                        </div>
-                        <div className="card">
-                            <div className="feature-icon">🔍</div>
-                            <h3>Quick Check</h3>
-                            <p>Simple symptom checker for rapid guidance.</p>
-                        </div>
-                        <div className="card">
-                            <div className="feature-icon">👨‍⚕️</div>
-                            <h3>Find Doctors</h3>
-                            <p>Search and book appointments with top specialists.</p>
-                        </div>
-                        <div className="card">
-                            <div className="feature-icon">🏥</div>
-                            <h3>Hospital Directory</h3>
-                            <p>Find nearby hospitals with real-time bed availability.</p>
-                        </div>
-                        <div className="card">
-                            <div className="feature-icon">📋</div>
-                            <h3>Digital Health Records</h3>
-                            <p>Store and manage your medical history securely.</p>
-                        </div>
-                        <div className="card">
-                            <div className="feature-icon">🚑</div>
-                            <h3>Emergency Services</h3>
-                            <p>Quick access to emergency care and ambulance services.</p>
-                        </div>
+                <div className="card">
+                    <h3>Quick Actions</h3>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                        <button onClick={() => onNavigate('/symptom-test')} className="btn btn-primary">Check Symptoms</button>
+                        <button onClick={() => onNavigate('/doctors')} className="btn btn-outline">Find Doctors</button>
+                        <button onClick={() => onNavigate('/appointments')} className="btn btn-outline">View Appointments</button>
                     </div>
                 </div>
-            );
-        };
+            </div>
 
-        // Login Page
-        const LoginPage = ({ onLogin }) => {
-            const [formData, setFormData] = useState({ email: '', password: '', userType: 'patient' });
-            const navigate = useNavigate();
+            <div className="card" style={{ marginTop: '2rem' }}>
+                <h3>Recent Medical Records</h3>
+                <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+                    <thead>
+                        <tr style={{ borderBottom: '2px solid #ddd' }}>
+                            <th style={{ textAlign: 'left', padding: '1rem' }}>Date</th>
+                            <th style={{ textAlign: 'left', padding: '1rem' }}>Type</th>
+                            <th style={{ textAlign: 'left', padding: '1rem' }}>Doctor</th>
+                            <th style={{ textAlign: 'left', padding: '1rem' }}>Result</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {healthRecords.map(record => (
+                            <tr key={record.id} style={{ borderBottom: '1px solid #eee' }}>
+                                <td style={{ padding: '1rem' }}>{record.date}</td>
+                                <td style={{ padding: '1rem' }}>{record.type}</td>
+                                <td style={{ padding: '1rem' }}>{record.doctor}</td>
+                                <td style={{ padding: '1rem' }}>{record.result}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    );
+};
 
-            const handleSubmit = (e) => {
-                e.preventDefault();
-                onLogin({
-                    name: formData.email.split('@')[0],
-                    email: formData.email,
-                    type: formData.userType
-                });
-                navigate('/dashboard/' + formData.userType);
-            };
+// New Features
 
-            return (
-                <div className="container">
-                    <div style={{ maxWidth: '400px', margin: '0 auto' }}>
-                        <h2 style={{ textAlign: 'center', marginBottom: '2rem' }}>Login to HealthConnect AI</h2>
-                        <div className="card">
-                            <form onSubmit={handleSubmit}>
-                                <div className="form-group">
-                                    <label>Login as</label>
-                                    <select 
-                                        value={formData.userType}
-                                        onChange={(e) => setFormData({...formData, userType: e.target.value})}
-                                    >
-                                        <option value="patient">Patient</option>
-                                        <option value="hospital">Hospital/Provider</option>
-                                    </select>
-                                </div>
-                                <div className="form-group">
-                                    <label>Email</label>
-                                    <input 
-                                        type="email" 
-                                        value={formData.email}
-                                        onChange={(e) => setFormData({...formData, email: e.target.value})}
-                                        required 
-                                    />
-                                </div>
-                                <div className="form-group">
-                                    <label>Password</label>
-                                    <input 
-                                        type="password" 
-                                        value={formData.password}
-                                        onChange={(e) => setFormData({...formData, password: e.target.value})}
-                                        required 
-                                    />
-                                </div>
-                                <button type="submit" className="btn btn-primary" style={{ width: '100%' }}>
-                                    Login
-                                </button>
-                            </form>
-                            <p style={{ textAlign: 'center', marginTop: '1rem' }}>
-                                Don't have an account? <Link to="/register">Register here</Link>
-                            </p>
-                        </div>
-                    </div>
+const RecommendedDoctorsPage = ({ onNavigate }) => {
+    const [triageData, setTriageData] = useState(null);
+    const [doctors, setDoctors] = useState([]);
+
+    useEffect(() => {
+        const saved = localStorage.getItem('triageResult');
+        if (saved) {
+            const parsed = JSON.parse(saved);
+            setTriageData(parsed);
+
+            // Filter by specialization, sort by rating and availability
+            const filtered = mockDoctors
+                .filter(d => d.specialization === parsed.specialization)
+                .sort((a, b) => {
+                    const scoreA = a.rating + (a.availability.length * 0.1);
+                    const scoreB = b.rating + (b.availability.length * 0.1);
+                    return scoreB - scoreA;
+                })
+                .slice(0, 3); // top 3
+            setDoctors(filtered);
+        }
+    }, []);
+
+    return (
+        <div className="container">
+            <h2 style={{ marginBottom: '1rem' }}>Recommended Doctors</h2>
+            {triageData && (
+                <div className="alert alert-warning" style={{ marginBottom: '2rem' }}>
+                    <strong>Based on your symptoms:</strong> We recommend seeing a {triageData.specialization}.
                 </div>
-            );
-        };
+            )}
 
-        // Register Page
-        const RegisterPage = ({ onLogin }) => {
-            const [formData, setFormData] = useState({ 
-                name: '', 
-                email: '', 
-                password: '', 
-                confirmPassword: '',
-                userType: 'patient' 
-            });
-            const navigate = useNavigate();
-
-            const handleSubmit = (e) => {
-                e.preventDefault();
-                if (formData.password !== formData.confirmPassword) {
-                    alert("Passwords don't match!");
-                    return;
-                }
-                onLogin({
-                    name: formData.name,
-                    email: formData.email,
-                    type: formData.userType
-                });
-                navigate('/dashboard/' + formData.userType);
-            };
-
-            return (
-                <div className="container">
-                    <div style={{ maxWidth: '400px', margin: '0 auto' }}>
-                        <h2 style={{ textAlign: 'center', marginBottom: '2rem' }}>Create Account</h2>
-                        <div className="card">
-                            <form onSubmit={handleSubmit}>
-                                <div className="form-group">
-                                    <label>Register as</label>
-                                    <select 
-                                        value={formData.userType}
-                                        onChange={(e) => setFormData({...formData, userType: e.target.value})}
-                                    >
-                                        <option value="patient">Patient</option>
-                                        <option value="hospital">Hospital/Provider</option>
-                                    </select>
-                                </div>
-                                <div className="form-group">
-                                    <label>Full Name</label>
-                                    <input 
-                                        type="text" 
-                                        value={formData.name}
-                                        onChange={(e) => setFormData({...formData, name: e.target.value})}
-                                        required 
-                                    />
-                                </div>
-                                <div className="form-group">
-                                    <label>Email</label>
-                                                                        <input 
-                                        type="email" 
-                                        value={formData.email}
-                                        onChange={(e) => setFormData({...formData, email: e.target.value})}
-                                        required 
-                                    />
-                                </div>
-                                <div className="form-group">
-                                    <label>Password</label>
-                                    <input 
-                                        type="password" 
-                                        value={formData.password}
-                                        onChange={(e) => setFormData({...formData, password: e.target.value})}
-                                        required 
-                                    />
-                                </div>
-                                <button type="submit" className="btn btn-primary" style={{ width: '100%' }}>
-                                    Register
-                                </button>
-                            </form>
-                            <p style={{ textAlign: 'center', marginTop: '1rem' }}>
-                                Already have an account? <Link to="/login">Login here</Link>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            );
-        };
-
-        // 5 Question Symptom Test Page
-        const SymptomTestPage = () => {
-            const [step, setStep] = useState(1);
-            const [answers, setAnswers] = useState({
-                symptom: "",
-                duration: "",
-                severity: 5,
-                associated: [],
-                history: ""
-            });
-            const [analysis, setAnalysis] = useState(null);
-            const [loading, setLoading] = useState(false);
-
-            const navigate = useNavigate();
-
-            const toggleAssociated = (symptom) => {
-                setAnswers(prev => {
-                    const exists = prev.associated.includes(symptom);
-                    return {
-                        ...prev,
-                        associated: exists
-                            ? prev.associated.filter(s => s !== symptom)
-                            : [...prev.associated, symptom]
-                    };
-                });
-            };
-
-            const handleNext = () => {
-                setStep(prev => prev + 1);
-            };
-
-            const handlePrevious = () => {
-                setStep(prev => prev - 1);
-            };
-
-            const performAITriage = (answers) => {
-                const { symptom, duration, severity, associated, history } = answers;
-                
-                let specialization = "General Physician";
-                let condition = "General";
-                let riskScore = 0;
-                
-                const symptomLower = symptom.toLowerCase();
-                if (symptomLower.includes('chest') || symptomLower.includes('heart')) {
-                    specialization = "Cardiologist";
-                    condition = "Cardiovascular";
-                    riskScore += 30;
-                } else if (symptomLower.includes('head') || symptomLower.includes('migraine') || symptomLower.includes('dizzy')) {
-                    specialization = "Neurologist";
-                    condition = "Neurological";
-                    riskScore += 20;
-                } else if (symptomLower.includes('skin') || symptomLower.includes('rash')) {
-                    specialization = "Dermatologist";
-                    condition = "Dermatological";
-                    riskScore += 10;
-                } else if (symptomLower.includes('bone') || symptomLower.includes('joint') || symptomLower.includes('muscle')) {
-                    specialization = "Orthopedic";
-                    condition = "Musculoskeletal";
-                    riskScore += 15;
-                } else if (symptomLower.includes('breath') || symptomLower.includes('cough')) {
-                    specialization = "Pulmonologist";
-                    condition = "Respiratory";
-                    riskScore += 25;
-                } else if (symptomLower.includes('stomach') || symptomLower.includes('nausea')) {
-                    specialization = "Gastroenterologist";
-                    condition = "Gastrointestinal";
-                    riskScore += 15;
-                }
-
-                if (duration === "Less than 24 hours") riskScore += 5;
-                else if (duration === "1–3 days") riskScore += 10;
-                else if (duration === "4–7 days") riskScore += 15;
-                else if (duration === "1–4 weeks") riskScore += 20;
-                else if (duration === "More than 1 month") riskScore += 25;
-
-                const severityNum = parseInt(severity);
-                riskScore += severityNum * 3;
-
-                if (associated.includes("Fever")) riskScore += 15;
-                if (associated.includes("Shortness of breath")) riskScore += 25;
-                if (associated.includes("Dizziness")) riskScore += 15;
-                if (associated.includes("Bleeding")) riskScore += 30;
-
-                if (history === "Currently on medication") riskScore += 10;
-                else if (history === "Previously treated") riskScore += 5;
-
-                let urgency = "";
-                let urgencyLevel = "";
-                let actionTime = "";
-                
-                if (riskScore >= 70 || severityNum >= 8 || associated.includes("Shortness of breath")) {
-                    urgency = "EMERGENCY";
-                    urgencyLevel = "Critical";
-                    actionTime = "Immediately - Visit ER now";
-                } else if (riskScore >= 50 || severityNum >= 6) {
-                    urgency = "URGENT";
-                    urgencyLevel = "High";
-                    actionTime = "Within 24 hours";
-                } else if (riskScore >= 30) {
-                    urgency = "MODERATE";
-                    urgencyLevel = "Medium";
-                    actionTime = "Within 2-3 days";
-                } else {
-                    urgency = "ROUTINE";
-                    urgencyLevel = "Low";
-                    actionTime = "Schedule an appointment";
-                }
-
-                const recommendations = [];
-                if (answers.severity >= 8) recommendations.push("Seek immediate medical attention");
-                if (answers.associated.includes("Shortness of breath")) recommendations.push("Monitor breathing - seek emergency if worsens");
-                if (answers.duration === "More than 1 month") recommendations.push("Schedule a specialist consultation");
-                recommendations.push(`Book appointment with ${specialization}`);
-
-                return {
-                    specialization,
-                    condition,
-                    riskScore: Math.min(100, riskScore),
-                    urgency,
-                    urgencyLevel,
-                    actionTime,
-                    recommendations
-                };
-            };
-
-            const handleAnalyze = () => {
-                setLoading(true);
-                setTimeout(() => {
-                    const result = performAITriage(answers);
-                    setAnalysis(result);
-                    setLoading(false);
-                }, 1500);
-            };
-
-            const handleReset = () => {
-                setStep(1);
-                setAnswers({
-                    symptom: "",
-                    duration: "",
-                    severity: 5,
-                    associated: [],
-                    history: ""
-                });
-                setAnalysis(null);
-            };
-
-            const getRiskClass = (score) => {
-                if (score >= 70) return "risk-high";
-                if (score >= 40) return "risk-moderate";
-                return "risk-low";
-            };
-
-            const progressPercentage = (step / 5) * 100;
-
-            if (analysis) {
-                return (
-                    <div className="container">
-                        <h2>AI Triage Results</h2>
-                        
-                        <div className="card">
-                            <h3>Analysis Complete</h3>
-                            
-                            <div style={{ textAlign: 'center', margin: '2rem 0' }}>
-                                <div className={`risk-score ${getRiskClass(analysis.riskScore)}`}>
-                                    {analysis.riskScore}
-                                </div>
-                                <p>Health Risk Score</p>
-                                <div className={`alert alert-${analysis.riskScore >= 70 ? 'danger' : analysis.riskScore >= 40 ? 'warning' : 'success'}`}>
-                                    <strong>Risk Level: {analysis.urgencyLevel}</strong>
-                                </div>
-                            </div>
-
-                            <div className="grid" style={{ marginTop: '2rem' }}>
-                                <div className="card">
-                                    <h4>Diagnosis</h4>
-                                    <p><strong>Condition Category:</strong> {analysis.condition}</p>
-                                    <p><strong>Recommended Specialist:</strong> {analysis.specialization}</p>
-                                    <p><strong>Urgency:</strong> {analysis.urgency}</p>
-                                    <p><strong>Action Required:</strong> {analysis.actionTime}</p>
-                                </div>
-
-                                <div className="card">
-                                    <h4>Recommendations</h4>
-                                    <ul style={{ marginLeft: '1.5rem' }}>
-                                        {analysis.recommendations.map((rec, index) => (
-                                            <li key={index}>{rec}</li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <div className="action-buttons">
-                                <Link to={`/doctors?specialization=${analysis.specialization}`} className="btn btn-primary">
-                                    Book {analysis.specialization}
-                                </Link>
-                                <Link to="/hospitals" className="btn btn-outline">
-                                    Find Nearby Hospital
-                                </Link>
-                                {analysis.riskScore >= 70 && (
-                                    <button className="btn btn-danger" onClick={() => window.location.href = 'tel:911'}>
-                                        🚑 Emergency Call
-                                    </button>
-                                )}
-                                <button onClick={handleReset} className="btn btn-outline">
-                                    Start Over
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                );
-            }
-
-            return (
-                <div className="container">
-                    <h2 style={{ marginBottom: '2rem' }}>AI Symptom Triage Assessment</h2>
-                    
-                    <div className="progress-bar">
-                        <div className="progress-fill" style={{ width: `${progressPercentage}%` }}></div>
-                    </div>
-
-                    <div className="step-indicator">
-                        <div className={`step ${step >= 1 ? 'active' : ''}`}>1. Main Symptom</div>
-                        <div className={`step ${step >= 2 ? 'active' : ''}`}>2. Duration</div>
-                        <div className={`step ${step >= 3 ? 'active' : ''}`}>3. Severity</div>
-                        <div className={`step ${step >= 4 ? 'active' : ''}`}>4. Associated</div>
-                        <div className={`step ${step >= 5 ? 'active' : ''}`}>5. History</div>
-                    </div>
-
-                    <div className="card">
-                        {step === 1 && (
-                            <>
-                                <h3>1. What is your main symptom?</h3>
-                                <p className="form-group">
-                                    <input
-                                        type="text"
-                                        className="symptom-input"
-                                        placeholder="Example: chest pain, headache, fever..."
-                                        value={answers.symptom}
-                                        onChange={(e) =>
-                                            setAnswers({ ...answers, symptom: e.target.value })
-                                        }
-                                    />
-                                </p>
-                                <div style={{ display: 'flex', gap: '1rem', justifyContent: 'flex-end' }}>
-                                    <button 
-                                        className="btn btn-primary" 
-                                        onClick={handleNext}
-                                        disabled={!answers.symptom}
-                                    >
-                                        Next
-                                    </button>
-                                </div>
-                            </>
-                        )}
-
-                        {step === 2 && (
-                            <>
-                                <h3>2. How long have you had this symptom?</h3>
-                                <p className="form-group">
-                                    <select
-                                        className="form-control"
-                                        value={answers.duration}
-                                        onChange={(e) =>
-                                            setAnswers({ ...answers, duration: e.target.value })
-                                        }
-                                    >
-                                        <option value="">Select duration</option>
-                                        <option value="Less than 24 hours">Less than 24 hours</option>
-                                        <option value="1–3 days">1–3 days</option>
-                                        <option value="4–7 days">4–7 days</option>
-                                        <option value="1–4 weeks">1–4 weeks</option>
-                                        <option value="More than 1 month">More than 1 month</option>
-                                    </select>
-                                </p>
-                                <div style={{ display: 'flex', gap: '1rem', justifyContent: 'space-between' }}>
-                                    <button className="btn btn-outline" onClick={handlePrevious}>
-                                        Previous
-                                    </button>
-                                    <button 
-                                        className="btn btn-primary" 
-                                        onClick={handleNext}
-                                        disabled={!answers.duration}
-                                    >
-                                        Next
-                                    </button>
-                                </div>
-                            </>
-                        )}
-
-                        {step === 3 && (
-                            <>
-                                <h3>3. Rate your symptom severity (1-10)</h3>
-                                <div className="slider-container">
-                                    <input
-                                        type="range"
-                                        className="slider"
-                                        min="1"
-                                        max="10"
-                                        value={answers.severity}
-                                        onChange={(e) =>
-                                            setAnswers({ ...answers, severity: e.target.value })
-                                        }
-                                    />
-                                    <div className="severity-labels">
-                                        <span>Mild (1-3)</span>
-                                        <span>Moderate (4-6)</span>
-                                        <span>Severe (7-8)</span>
-                                        <span>Emergency (9-10)</span>
-                                    </div>
-                                    <p style={{ textAlign: 'center', fontSize: '2rem', marginTop: '1rem' }}>
-                                        {answers.severity}
-                                    </p>
-                                </div>
-                                <div style={{ display: 'flex', gap: '1rem', justifyContent: 'space-between' }}>
-                                    <button className="btn btn-outline" onClick={handlePrevious}>
-                                        Previous
-                                    </button>
-                                    <button className="btn btn-primary" onClick={handleNext}>
-                                        Next
-                                    </button>
-                                </div>
-                            </>
-                        )}
-
-                        {step === 4 && (
-                            <>
-                                <h3>4. Associated Symptoms</h3>
-                                <p>Select all that apply:</p>
-                                <div className="checkbox-group">
-                                    {[
-                                        "Fever",
-                                        "Shortness of breath",
-                                        "Nausea",
-                                        "Dizziness",
-                                        "Fatigue",
-                                        "Bleeding",
-                                        "Swelling",
-                                        "Cough"
-                                    ].map((sym) => (
-                                        <label key={sym}>
-                                            <input
-                                                type="checkbox"
-                                                onChange={() => toggleAssociated(sym)}
-                                                checked={answers.associated.includes(sym)}
-                                            />
-                                            {sym}
-                                        </label>
-                                    ))}
-                                </div>
-                                <div style={{ display: 'flex', gap: '1rem', justifyContent: 'space-between', marginTop: '2rem' }}>
-                                    <button className="btn btn-outline" onClick={handlePrevious}>
-                                        Previous
-                                    </button>
-                                    <button className="btn btn-primary" onClick={handleNext}>
-                                        Next
-                                    </button>
-                                </div>
-                            </>
-                        )}
-
-                        {step === 5 && (
-                            <>
-                                <h3>5. Medical History</h3>
-                                <p className="form-group">
-                                    <label>Have you experienced this before or taken any treatment?</label>
-                                    <select
-                                        className="form-control"
-                                        value={answers.history}
-                                        onChange={(e) =>
-                                            setAnswers({ ...answers, history: e.target.value })
-                                        }
-                                    >
-                                        <option value="">Select</option>
-                                        <option value="First time">No, this is the first time</option>
-                                        <option value="No treatment yet">Yes, but no treatment taken</option>
-                                        <option value="Currently on medication">Yes, currently taking medication</option>
-                                        <option value="Previously treated">Yes, previously treated by a doctor</option>
-                                    </select>
-                                </p>
-                                <div style={{ display: 'flex', gap: '1rem', justifyContent: 'space-between' }}>
-                                    <button className="btn btn-outline" onClick={handlePrevious}>
-                                        Previous
-                                    </button>
-                                    <button 
-                                        className="btn btn-primary" 
-                                        onClick={handleAnalyze}
-                                        disabled={!answers.history || loading}
-                                    >
-                                        {loading ? 'Analyzing...' : 'Complete Assessment'}
-                                    </button>
-                                </div>
-                            </>
-                        )}
-                    </div>
-                </div>
-            );
-        };
-
-        // Quick Symptom Checker Page
-        const SymptomCheckerPage = () => {
-            const [symptoms, setSymptoms] = useState('');
-            const [analysis, setAnalysis] = useState(null);
-            const [loading, setLoading] = useState(false);
-
-            const analyzeSymptoms = (symptoms) => {
-                const symptomLower = symptoms.toLowerCase();
-                
-                if (symptomLower.includes('chest') || symptomLower.includes('heart') || symptomLower.includes('breath')) {
-                    return {
-                        specialization: 'Cardiologist',
-                        urgency: 'High - Please seek immediate medical attention if severe',
-                        recommendations: ['Visit nearest emergency room', 'Avoid physical exertion', 'Book cardiology appointment']
-                    };
-                } else if (symptomLower.includes('head') || symptomLower.includes('migraine') || symptomLower.includes('dizzy')) {
-                    return {
-                        specialization: 'Neurologist',
-                        urgency: 'Medium',
-                        recommendations: ['Rest in dark room', 'Stay hydrated', 'Consult neurologist']
-                    };
-                } else if (symptomLower.includes('skin') || symptomLower.includes('rash') || symptomLower.includes('itch')) {
-                    return {
-                        specialization: 'Dermatologist',
-                        urgency: 'Low to Medium',
-                        recommendations: ['Avoid scratching', 'Use gentle skin products', 'Book dermatology appointment']
-                    };
-                } else if (symptomLower.includes('child') || symptomLower.includes('baby') || symptomLower.includes('pediatric')) {
-                    return {
-                        specialization: 'Pediatrician',
-                        urgency: 'Medium',
-                        recommendations: ['Monitor temperature', 'Ensure hydration', 'Consult pediatrician']
-                    };
-                } else if (symptomLower.includes('bone') || symptomLower.includes('joint') || symptomLower.includes('muscle')) {
-                    return {
-                        specialization: 'Orthopedic',
-                        urgency: 'Medium',
-                        recommendations: ['Rest affected area', 'Apply ice if swollen', 'Consult orthopedic specialist']
-                    };
-                } else {
-                    return {
-                        specialization: 'General Physician',
-                        urgency: 'Low to Medium',
-                        recommendations: ['Monitor symptoms', 'Rest adequately', 'Consult general physician']
-                    };
-                }
-            };
-
-            const handleAnalyze = () => {
-                setLoading(true);
-                setTimeout(() => {
-                    const result = analyzeSymptoms(symptoms);
-                    setAnalysis(result);
-                    setLoading(false);
-                }, 1000);
-            };
-
-            return (
-                <div className="container">
-                    <h2 style={{ marginBottom: '2rem' }}>Quick Symptom Checker</h2>
-                    <div className="grid">
-                        <div className="card">
-                            <h3>Describe Your Symptoms</h3>
-                            <textarea 
-                                className="symptom-input"
-                                rows="6"
-                                placeholder="Describe your symptoms in detail..."
-                                value={symptoms}
-                                onChange={(e) => setSymptoms(e.target.value)}
-                            />
-                            <button 
-                                onClick={handleAnalyze} 
-                                className="btn btn-primary"
-                                disabled={!symptoms || loading}
-                                style={{ width: '100%' }}
-                            >
-                                {loading ? 'Analyzing...' : 'Analyze Symptoms'}
+            {doctors.length === 0 ? (
+                <p>No doctors found matching this specialization.</p>
+            ) : (
+                <div className="grid">
+                    {doctors.map(doctor => (
+                        <div key={doctor.id} className="card" style={{ borderTop: '4px solid var(--secondary)' }}>
+                            <h3>{doctor.name}</h3>
+                            <p><strong>Specialization:</strong> {doctor.specialization}</p>
+                            <p><strong>Hospital:</strong> {doctor.hospital}</p>
+                            <p><strong>AI Score:</strong> ⭐ {doctor.rating}/5</p>
+                            <p><strong>Availability:</strong> {doctor.availability.join(', ')}</p>
+                            <button onClick={() => onNavigate('/appointments')} className="btn btn-primary" style={{ width: '100%', marginTop: '1rem' }}>
+                                Book Priority Appointment
                             </button>
                         </div>
-                        
-                        {analysis && (
-                            <div className="card">
-                                <h3>Analysis Results</h3>
-                                <div className="symptom-results">
-                                    <p><strong>Recommended Specialist:</strong> {analysis.specialization}</p>
-                                    <p><strong>Urgency Level:</strong> {analysis.urgency}</p>
-                                    <h4>Recommendations:</h4>
-                                    <ul>
-                                        {analysis.recommendations.map((rec, index) => (
-                                            <li key={index}>{rec}</li>
-                                        ))}
-                                    </ul>
-                                    <div style={{ marginTop: '1.5rem' }}>
-                                        <Link to="/doctors" className="btn btn-primary" style={{ marginRight: '1rem' }}>
-                                            Find {analysis.specialization}
-                                        </Link>
-                                        <Link to="/hospitals" className="btn btn-outline">
-                                            Find Nearby Hospitals
-                                        </Link>
-                                    </div>
-                                </div>
-                            </div>
-                        )}
+                    ))}
+                </div>
+            )}
+        </div>
+    );
+};
+
+const HealthTimelinePage = () => {
+    return (
+        <div className="container">
+            <h2 style={{ marginBottom: '2rem' }}>Smart Health Timeline</h2>
+            <div style={{ position: 'relative', paddingLeft: '2rem', borderLeft: '2px solid var(--secondary)' }}>
+                {mockTimeline.map(item => (
+                    <div key={item.id} className="card" style={{ marginBottom: '1.5rem', position: 'relative' }}>
+                        <div style={{
+                            position: 'absolute', left: '-2.6rem', top: '1rem',
+                            width: '1rem', height: '1rem', borderRadius: '50%',
+                            background: 'var(--secondary)', border: '3px solid var(--white)'
+                        }}></div>
+                        <h3 style={{ color: 'var(--primary)' }}>{item.date}</h3>
+                        <h4>{item.type}</h4>
+                        <p>{item.title}</p>
+                        <p style={{ marginTop: '0.5rem', fontWeight: 'bold' }}>Result: {item.result}</p>
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+};
+
+const TeleconsultationPage = () => {
+    return (
+        <div className="container">
+            <h2 style={{ marginBottom: '2rem' }}>Telemedicine Consultation</h2>
+            <div className="grid" style={{ gridTemplateColumns: '2fr 1fr' }}>
+                <div className="card" style={{ minHeight: '400px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#000', color: '#fff' }}>
+                    <div style={{ textAlign: 'center' }}>
+                        <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>📷</div>
+                        <h3>Video Call Placeholder</h3>
+                        <p>Waiting for Doctor...</p>
                     </div>
                 </div>
-            );
-        };
-
-        // Main App Component
-        const App = () => {
-            const [user, setUser] = useState(null);
-
-            const handleLogin = (userData) => {
-                setUser(userData);
-            };
-
-            const handleLogout = () => {
-                setUser(null);
-            };
-
-            return (
-                <BrowserRouter>
-                    <div className="app">
-                        <Navigation user={user} onLogout={handleLogout} />
-                        
-                        <Routes>
-                            <Route path="/" element={<HomePage />} />
-                            <Route path="/symptom-test" element={<SymptomTestPage />} />
-                            <Route path="/symptoms" element={<SymptomCheckerPage />} />
-                            <Route path="/doctors" element={<DoctorsPage />} />
-                            <Route path="/hospitals" element={<HospitalsPage />} />
-                            <Route path="/appointments" element={<AppointmentsPage />} />
-                            <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
-                            <Route path="/register" element={<RegisterPage onLogin={handleLogin} />} />
-                            <Route path="/dashboard/user" element={
-                                user ? <UserDashboard user={user} /> : <Navigate to="/login" />
-                            } />
-                            <Route path="/dashboard/hospital" element={
-                                user ? <HospitalDashboard user={user} /> : <Navigate to="/login" />
-                            } />
-                        </Routes>
-
-                        <Footer />
+                <div className="card" style={{ display: 'flex', flexDirection: 'column' }}>
+                    <h3>Live Chat</h3>
+                    <div style={{ flex: 1, border: '1px solid #ddd', borderRadius: 'var(--border-radius)', padding: '1rem', marginBottom: '1rem', background: 'var(--light)' }}>
+                        <p style={{ fontSize: '0.9rem', color: '#666' }}>Chat session started.</p>
                     </div>
-                </BrowserRouter>
-            );
-        };
+                    <div style={{ display: 'flex', gap: '0.5rem' }}>
+                        <input type="text" placeholder="Type a message..." style={{ flex: 1, padding: '0.5rem' }} />
+                        <button className="btn btn-primary">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
 
-        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
-    </script>
+const LabTestsPage = () => {
+    return (
+        <div className="container">
+            <h2 style={{ marginBottom: '2rem' }}>Book Diagnostic Tests</h2>
+            <div className="grid">
+                {mockLabs.map(lab => (
+                    <div key={lab.id} className="card">
+                        <h3>{lab.name}</h3>
+                        <p><strong>Type:</strong> {lab.type}</p>
+                        <p><strong>Price:</strong> {lab.price}</p>
+                        <div style={{ marginTop: '1rem' }}>
+                            <input type="date" style={{ width: '100%', padding: '0.5rem', marginBottom: '0.5rem' }} />
+                            <button className="btn btn-primary" style={{ width: '100%' }}>Book Test</button>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+};
+
+const HealthMapPage = () => {
+    return (
+        <div className="container">
+            <h2 style={{ marginBottom: '2rem' }}>Nearby Healthcare Facilities</h2>
+            <div className="card" style={{ padding: 0, overflow: 'hidden' }}>
+                <div style={{ background: '#e5e3df', height: '500px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <div style={{ textAlign: 'center' }}>
+                        <span style={{ fontSize: '3rem' }}>🗺️</span>
+                        <h3>Interactive Map Placeholder</h3>
+                        <p>Shows Hospitals, Clinics, and Pharmacies near you (Requires Maps API integration)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+const EmergencyProfilePage = () => {
+    return (
+        <div className="container">
+            <h2 style={{ marginBottom: '2rem', color: 'var(--danger)' }}>Emergency Health Profile</h2>
+            <div className="card" style={{ border: '2px solid var(--danger)' }}>
+                <h3>Critical Information</h3>
+                <p>This profile is visible to emergency responders instantly.</p>
+                <form style={{ marginTop: '1.5rem' }}>
+                    <div className="grid" style={{ gap: '1rem', marginTop: 0 }}>
+                        <div className="form-group">
+                            <label>Blood Group</label>
+                            <input type="text" defaultValue="O+" />
+                        </div>
+                        <div className="form-group">
+                            <label>Allergies</label>
+                            <input type="text" defaultValue="Penicillin, Peanuts" />
+                        </div>
+                        <div className="form-group">
+                            <label>Chronic Diseases</label>
+                            <input type="text" defaultValue="Asthma" />
+                        </div>
+                        <div className="form-group">
+                            <label>Current Medications</label>
+                            <input type="text" defaultValue="Albuterol Inhaler" />
+                        </div>
+                        <div className="form-group">
+                            <label>Emergency Contact Name</label>
+                            <input type="text" defaultValue="Jane Doe" />
+                        </div>
+                        <div className="form-group">
+                            <label>Emergency Contact Phone</label>
+                            <input type="text" defaultValue="555-0199" />
+                        </div>
+                    </div>
+                    <button type="button" className="btn btn-danger" style={{ marginTop: '1rem' }}>Save Emergency Profile</button>
+                </form>
+            </div>
+        </div>
+    );
+};
+
+const PharmacyPage = () => {
+    return (
+        <div className="container">
+            <h2 style={{ marginBottom: '2rem' }}>Order Medicines</h2>
+            <div className="card" style={{ marginBottom: '2rem' }}>
+                <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                    <input type="text" placeholder="Search for medicines..." style={{ flex: 1, padding: '0.75rem', borderRadius: 'var(--border-radius)', border: '1px solid #ddd' }} />
+                    <button className="btn btn-primary">Search</button>
+                    <button className="btn btn-outline">Upload Prescription</button>
+                </div>
+            </div>
+            <div className="grid">
+                <div className="card">
+                    <h3>Paracetamol 500mg</h3>
+                    <p>Fever and Pain Relief</p>
+                    <p><strong>$5.00</strong></p>
+                    <button className="btn btn-outline" style={{ width: '100%', marginTop: '1rem' }}>Add to Cart</button>
+                </div>
+                <div className="card">
+                    <h3>Amoxicillin 250mg</h3>
+                    <p>Antibiotic (Prescription Required)</p>
+                    <p><strong>$12.50</strong></p>
+                    <button className="btn btn-outline" style={{ width: '100%', marginTop: '1rem' }}>Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+const HealthLibraryPage = () => {
+    return (
+        <div className="container">
+            <h2 style={{ marginBottom: '2rem' }}>Health Education Hub</h2>
+            <div className="grid">
+                <div className="card">
+                    <div style={{ fontSize: '2rem' }}>❤️</div>
+                    <h3>Heart Health</h3>
+                    <p>Learn about cardiovascular disease prevention and care.</p>
+                    <button className="btn btn-outline" style={{ marginTop: '1rem' }}>Read Articles</button>
+                </div>
+                <div className="card">
+                    <div style={{ fontSize: '2rem' }}>🩸</div>
+                    <h3>Diabetes Management</h3>
+                    <p>Tips for managing blood sugar and diet.</p>
+                    <button className="btn btn-outline" style={{ marginTop: '1rem' }}>Read Articles</button>
+                </div>
+                <div className="card">
+                    <div style={{ fontSize: '2rem' }}>🧠</div>
+                    <h3>Mental Health</h3>
+                    <p>Resources for stress, anxiety, and mental well-being.</p>
+                    <button className="btn btn-outline" style={{ marginTop: '1rem' }}>Read Articles</button>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+const FamilyMembersPage = () => {
+    return (
+        <div className="container">
+            <h2 style={{ marginBottom: '2rem' }}>Family Health Management</h2>
+            <button className="btn btn-primary" style={{ marginBottom: '2rem' }}>+ Add Family Member</button>
+            <div className="grid">
+                {mockFamily.map(member => (
+                    <div key={member.id} className="card">
+                        <h3>{member.name}</h3>
+                        <p><strong>Relation:</strong> {member.relation}</p>
+                        <p><strong>Age:</strong> {member.age}</p>
+                        <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
+                            <button className="btn btn-outline" style={{ flex: 1 }}>Records</button>
+                            <button className="btn btn-outline" style={{ flex: 1 }}>Book Appt</button>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+};
+
+const HealthProgramsPage = () => {
+    return (
+        <div className="container">
+            <h2 style={{ marginBottom: '2rem' }}>Preventive Health Programs</h2>
+            <div className="grid">
+                <div className="card">
+                    <h3>Weight Loss Program</h3>
+                    <p>Includes diet suggestions, exercise plan, and monthly doctor consultation.</p>
+                    <button className="btn btn-primary" style={{ marginTop: '1rem' }}>Join Program</button>
+                </div>
+                <div className="card">
+                    <h3>Diabetes Prevention</h3>
+                    <p>Track your vitals, get nutrition planning, and continuous monitoring.</p>
+                    <button className="btn btn-primary" style={{ marginTop: '1rem' }}>Join Program</button>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+const InsurancePage = () => {
+    return (
+        <div className="container">
+            <h2 style={{ marginBottom: '2rem' }}>Health Insurance Integration</h2>
+            <div className="card" style={{ textAlign: 'center', padding: '3rem' }}>
+                <span style={{ fontSize: '3rem' }}>🛡️</span>
+                <h3>No Active Policies Found</h3>
+                <p>Upload your health insurance policy to check hospital coverage and claim assistance.</p>
+                <button className="btn btn-primary" style={{ marginTop: '1rem' }}>Upload Policy Document</button>
+            </div>
+        </div>
+    );
+};
+
+// Main App Component
+const App = () => {
+    const [user, setUser] = useState(null);
+    const [history, setHistory] = useState(['/']);
+
+    const currentPage = history[history.length - 1] || '/';
+
+    const handleLogin = (userData) => {
+        setUser(userData);
+    };
+
+    const handleLogout = () => {
+        setUser(null);
+        setHistory(['/']);
+    };
+
+    const navigate = (page) => {
+        setHistory(prev => [...prev, page]);
+        window.scrollTo(0, 0);
+    };
+
+    const goBack = () => {
+        setHistory(prev => prev.length > 1 ? prev.slice(0, -1) : prev);
+        window.scrollTo(0, 0);
+    };
+
+    const renderPage = () => {
+        // Protected routes
+        if (['/appointments', '/dashboard'].includes(currentPage) && !user) {
+            navigate('/login');
+            return <LoginPage onLogin={handleLogin} onNavigate={navigate} />;
+        }
+
+        switch (currentPage) {
+            case '/':
+                return <HomePage onNavigate={navigate} />;
+            case '/login':
+                return <LoginPage onLogin={handleLogin} onNavigate={navigate} />;
+            case '/register':
+                return <RegisterPage onLogin={handleLogin} onNavigate={navigate} />;
+            case '/symptom-test':
+                return <SymptomTriageTestPage onNavigate={navigate} />;
+            case '/symptoms':
+                return <QuickSymptomCheckerPage onNavigate={navigate} />;
+            case '/doctors':
+                return <DoctorsPage onNavigate={navigate} />;
+            case '/recommended-doctors':
+                return <RecommendedDoctorsPage onNavigate={navigate} />;
+            case '/health-timeline':
+                return <HealthTimelinePage onNavigate={navigate} />;
+            case '/teleconsultation':
+                return <TeleconsultationPage onNavigate={navigate} />;
+            case '/lab-tests':
+                return <LabTestsPage onNavigate={navigate} />;
+            case '/health-map':
+                return <HealthMapPage onNavigate={navigate} />;
+            case '/emergency-profile':
+                return <EmergencyProfilePage onNavigate={navigate} />;
+            case '/pharmacy':
+                return <PharmacyPage onNavigate={navigate} />;
+            case '/health-library':
+                return <HealthLibraryPage onNavigate={navigate} />;
+            case '/family-members':
+                return <FamilyMembersPage onNavigate={navigate} />;
+            case '/health-programs':
+                return <HealthProgramsPage onNavigate={navigate} />;
+            case '/insurance':
+                return <InsurancePage onNavigate={navigate} />;
+            case '/hospitals':
+                return <HospitalsPage onNavigate={navigate} />;
+            case '/appointments':
+                return <AppointmentsPage onNavigate={navigate} />;
+            case '/dashboard':
+                return <DashboardPage user={user} onNavigate={navigate} />;
+            default:
+                return <HomePage onNavigate={navigate} />;
+        }
+    };
+
+    return (
+        <div className="app">
+            <Navigation user={user} onLogout={handleLogout} onNavigate={navigate} />
+
+            {/* Global Back Button */}
+            {currentPage !== '/' && !['/login', '/register'].includes(currentPage) && (
+                <div style={{ maxWidth: '1200px', margin: '1rem auto 0 auto', padding: '0 2rem', width: '100%' }}>
+                    <button onClick={goBack} className="btn" style={{
+                        display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
+                        padding: '0.5rem 1rem', border: '1px solid #ddd',
+                        background: 'var(--white)', color: 'var(--dark)',
+                        fontWeight: '500', borderRadius: 'var(--border-radius)', cursor: 'pointer'
+                    }}>
+                        &larr; Back
+                    </button>
+                </div>
+            )}
+
+            {renderPage()}
+            <Footer />
+        </div>
+    );
+};
+
+// Render
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+
+
+
+</script>
 </body>
 </html>
