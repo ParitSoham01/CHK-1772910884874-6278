@@ -11,10 +11,18 @@ const mockDoctors = [
 ];
 
 const mockHospitals = [
-    { id: 1, name: "City General Hospital", address: "123 Main St", emergency: true, bedsAvailable: 45, rating: 4.5 },
-    { id: 2, name: "St. Mary's Medical Center", address: "456 Oak Ave", emergency: true, bedsAvailable: 30, rating: 4.8 },
-    { id: 3, name: "Children's Health Center", address: "789 Pine St", emergency: false, bedsAvailable: 15, rating: 4.6 },
-    { id: 4, name: "Sports Medicine Institute", address: "321 Elm St", emergency: false, bedsAvailable: 20, rating: 4.4 }
+    { id: 1, name: "Lifeline Super Speciality Hospital", address: "M898+VH7, Datta Nagar, Isbavi, Pandharpur, Maharashtra 413304, India", emergency: true, bedsAvailable: 50, rating: 4.7 },
+    { id: 2, name: "Lifeline Super Speciality Hospital Pandharpur", address: "M898+VH7, Datta Nagar, Isbavi, Pandharpur, Maharashtra 413304, India", emergency: true, bedsAvailable: 40, rating: 4.6 },
+    { id: 3, name: "Dr Nikam's Tulip Superspeciality Hospital Pandharpur", address: "D, MART Road, near KBP College Chowk, June Pat, Pandharpur, Maharashtra 413304, India", emergency: true, bedsAvailable: 35, rating: 4.5 },
+    { id: 4, name: "Sub District Hospital, Pandharpur (Govt Hospital)", address: "M8PM+774, June Pat, Pandharpur, Maharashtra 413304, India", emergency: true, bedsAvailable: 60, rating: 4.2 },
+    { id: 5, name: "Navjeevan Children Hospital", address: "#34, Sargam Chowk, behind Sargam Cinema, Pandharpur, Maharashtra 413304, India", emergency: false, bedsAvailable: 25, rating: 4.4 },
+    { id: 6, name: "Agraj Hospital", address: "Near Datta Nagar, Navin Karad Naka, Pandharpur, Maharashtra 413304, India", emergency: false, bedsAvailable: 30, rating: 4.1 },
+    { id: 7, name: "Mohite Hospital, Link Road", address: "Link Rd, Samata Nagar, Isbavi, Pandharpur, Maharashtra 413304, India", emergency: false, bedsAvailable: 35, rating: 4.3 },
+    { id: 8, name: "Bhosale Hospital", address: "Gokul Nagar, Isbavi, Pandharpur, Maharashtra 413304, India", emergency: false, bedsAvailable: 20, rating: 4.0 },
+    { id: 9, name: "Old Pandharpur Municipal Council Hospital", address: "M8JM+9RF, Chouphala, Pandharpur, Maharashtra 413304, India", emergency: true, bedsAvailable: 45, rating: 3.8 },
+    { id: 10, name: "Kachare Hospital", address: "Behind 10 Elements Gym, New Karad Naka, Pandharpur, Maharashtra 413304, India", emergency: false, bedsAvailable: 15, rating: 4.2 },
+    { id: 11, name: "Sanjeevani Hospital Pandharpur", address: "M8H7+7C2, June Pat, Pandharpur, Maharashtra 413304, India", emergency: false, bedsAvailable: 40, rating: 4.3 },
+    { id: 12, name: "Shri Ganapati Multispeciality Hospital", address: "Front of Uma College Rd, Datta Nagar, Isbavi, Pandharpur, Maharashtra 413304, India", emergency: false, bedsAvailable: 35, rating: 4.4 }
 ];
 
 const mockTimeline = [
@@ -1927,7 +1935,7 @@ const FamilyMembersPage = ({ onNavigate }) => {
             )}
 
             <div className="grid">
-            
+
                 {members.map(member => (
                     <div key={member.id} className="card" style={{ position: 'relative' }}>
                         <button className="btn btn-danger" style={{ position: 'absolute', top: '1rem', right: '1rem', padding: '0.25rem 0.5rem', fontSize: '0.8rem' }} onClick={() => alert('Emergency access activated for ' + member.name)}>
