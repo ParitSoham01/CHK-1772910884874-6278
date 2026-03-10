@@ -1927,6 +1927,7 @@ const FamilyMembersPage = ({ onNavigate }) => {
             )}
 
             <div className="grid">
+            
                 {members.map(member => (
                     <div key={member.id} className="card" style={{ position: 'relative' }}>
                         <button className="btn btn-danger" style={{ position: 'absolute', top: '1rem', right: '1rem', padding: '0.25rem 0.5rem', fontSize: '0.8rem' }} onClick={() => alert('Emergency access activated for ' + member.name)}>
